@@ -1,0 +1,87 @@
+<template>
+  <div class="min-h-screen bg-gray-50 flex flex-col">
+    <!-- Navbar -->
+    <AppNavbar />
+
+    <!-- Contenu principal -->
+    <main class="flex-1">
+      <router-view />
+    </main>
+
+    <!-- Chat Assistant -->
+    <ChatAssistant />
+
+    <!-- Modaux -->
+    <LoginModal
+      :isOpen="showLoginModal"
+      @close="showLoginModal = false"
+      @switch-to-register="switchModals('register')"
+    />
+    <RegisterModal
+      :isOpen="showRegisterModal"
+      @close="showRegisterModal = false"
+      @switch-to-login="switchModals('login')"
+    />
+    <AppointmentModal :isOpen="showAppointmentModal" @close="showAppointmentModal = false" />
+
+    <!-- Notifications et toasts -->
+    <ToastContainer />
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useAuthStore } from '@/stores/authStore'
+import AppNavbar from '@/components/layout/AppNavbar.vue'
+import LoginModal from '@/components/auth/LoginModal.vue'
+import RegisterModal from '@/components/auth/RegisterModal.vue'
+import AppointmentModal from '@/components/appointment/AppointmentModal.vue'
+import ChatAssistant from '@/components/chat/ChatAssistant.vue'
+import ToastContainer from '@/components/common/ToastContainer.vue'
+
+const authStore = useAuthStore()
+
+const showLoginModal = ref(false)
+const showRegisterModal = ref(false)
+const showAppointmentModal = ref(false)
+
+onMounted(() => {
+  // Initialiser l'auth depuis localStorage
+  authStore.initializeAuth()
+})
+
+function switchModals(to) {
+  if (to === 'login') {
+    showRegisterModal.value = false
+    showLoginModal.value = true
+  } else if (to === 'register') {
+    showLoginModal.value = false
+    showRegisterModal.value = true
+  }
+}
+
+// Exposer les modaux pour utilisation globale
+window.appModals = {
+  openLogin: () => (showLoginModal.value = true),
+  closeLogin: () => (showLoginModal.value = false),
+  openRegister: () => (showRegisterModal.value = true),
+  closeRegister: () => (showRegisterModal.value = false),
+  openAppointment: () => (showAppointmentModal.value = true),
+  closeAppointment: () => (showAppointmentModal.value = false),
+}
+</script>
+
+<style scoped>
+main {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>
