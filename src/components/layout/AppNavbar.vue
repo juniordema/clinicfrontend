@@ -2,15 +2,17 @@
   <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <!-- Logo -->
+        
         <router-link to="/" class="flex items-center gap-2">
-          <div class="w-10 h-10 rounded-lg bg-teal-600 flex items-center justify-center">
-            <span class="text-white font-bold text-lg">🏥</span>
-          </div>
+          <img
+            :src="logo"
+            alt="Angelo Clinic logo"
+            class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-contain flex-shrink-0"
+          />
           <span class="font-bold text-gray-800 hidden sm:inline">Angelo Clinic</span>
         </router-link>
 
-        <!-- Desktop Menu -->
+        
         <div class="hidden md:flex items-center gap-6">
           <router-link to="/" class="text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.home') }}</router-link>
           <a href="/#services" class="text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.services') }}</a>
@@ -18,7 +20,7 @@
           <a href="/#doctors" class="text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.doctors') }}</a>
           <a href="/#contact" class="text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.contact') }}</a>
 
-          <!-- Sélecteur de langue -->
+          
           <div class="relative group">
             <button class="px-3 py-2 text-gray-600 hover:text-gray-900 font-medium flex items-center gap-1"
               title="Changer la langue">
@@ -46,10 +48,10 @@
             <NotificationBell />
           </template>
 
-          <!-- Section Médecin -->
+          
           <template v-if="isDoctor">
 
-            <!-- Déconnexion simple pour médecin -->
+            
             <button
               @click="handleLogout"
               class="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg font-medium transition"
@@ -57,7 +59,7 @@
               {{ $t('nav.logout') }}
             </button>
 
-            <!-- Bouton pour se connecter comme quelqu'un d'autre (même en tant que médecin) -->
+            
             <button
               @click="switchAccount"
               class="px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg font-medium transition"
@@ -67,14 +69,14 @@
             </button>
           </template>
 
-          <!-- Section Patient/Non-authentifié -->
+          
           <template v-else>
-            <!-- Rendez-vous button pour patients -->
+            
             <button @click="openAppointmentModal" class="px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-700 text-white font-medium transition">
               {{ $t('nav.appointment') }}
             </button>
 
-            <!-- User Info -->
+            
             <template v-if="isAuthenticated">
               <div class="flex items-center gap-3">
                 <router-link
@@ -84,7 +86,7 @@
                   👤 {{ user?.firstName }}
                 </router-link>
                 
-                <!-- Menu déroulant avec icône engrenage -->
+                
                 <div class="relative group">
                   <button class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
                     title="Paramètres du compte">
@@ -105,7 +107,7 @@
               </div>
             </template>
 
-            <!-- Bouton Connexion - TOUJOURS VISIBLE -->
+            
             <button
               @click="isAuthenticated ? switchAccount() : openLoginModal()"
               :class="isAuthenticated 
@@ -119,7 +121,7 @@
           </template>
         </div>
 
-        <!-- Mobile Menu Button -->
+        
         <button
           @click="mobileMenuOpen = !mobileMenuOpen"
           class="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded"
@@ -128,18 +130,17 @@
         </button>
       </div>
 
-      <!-- Mobile Menu -->
+      
       <div v-if="mobileMenuOpen" class="md:hidden border-t border-gray-200 py-4 space-y-4">
-        <router-link to="/" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.home') }}</router-link>
-        <a href="/#services" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.services') }}</a>
-        <a href="/#imagerie" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.imaging') }}</a>
-        <a href="/#doctors" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.doctors') }}</a>
-        <a href="/#contact" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.contact') }}</a>
+        <router-link @click="mobileMenuOpen = false" to="/" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.home') }}</router-link>
+        <a @click="mobileMenuOpen = false" href="/#services" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.services') }}</a>
+        <a @click="mobileMenuOpen = false" href="/#imagerie" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.imaging') }}</a>
+        <a @click="mobileMenuOpen = false" href="/#doctors" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.doctors') }}</a>
+        <a @click="mobileMenuOpen = false" href="/#contact" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.contact') }}</a>
 
-        <!-- Sélecteur de langue Mobile -->
         <div class="px-4 py-2 border-t border-gray-200 pt-4">
           <p class="text-xs text-gray-500 font-medium mb-2">{{ $t('nav.language') }}</p>
-          <div class="flex gap-2">
+          <div class="grid grid-cols-2 gap-2">
             <button
               @click="languageStore.setLanguage('fr')"
               :class="languageStore.isFrench ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-600'"
@@ -157,19 +158,19 @@
           </div>
         </div>
 
-        <!-- Section Médecin Mobile -->
+        
         <template v-if="isDoctor">
           <div class="px-4">
             <NotificationBell />
           </div>
-          <!-- Déconnexion pour médecin -->
+          
           <button
             @click="handleLogout"
             class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 rounded"
           >
             {{ $t('nav.logout') }}
           </button>
-          <!-- Autre compte -->
+          
           <button
             @click="switchAccount"
             class="w-full text-left px-4 py-2 text-blue-700 hover:bg-blue-50 rounded font-medium"
@@ -178,7 +179,7 @@
           </button>
         </template>
 
-        <!-- Section Patient/Non-authentifié Mobile -->
+        
         <template v-else>
           <div v-if="isAuthenticated" class="px-4">
             <NotificationBell />
@@ -189,7 +190,7 @@
             {{ $t('nav.appointment') }}
           </button>
 
-          <!-- User Info Mobile -->
+          
           <template v-if="isAuthenticated">
             <router-link
               to="/dashboard"
@@ -215,7 +216,7 @@
             </button>
           </template>
 
-          <!-- Bouton Connexion Mobile (toujours visible) -->
+          
           <button
             @click="isAuthenticated ? switchAccount() : openLoginModal()"
             :class="isAuthenticated 
@@ -239,6 +240,7 @@ import { useAuthStore } from '@/stores/authStore'
 import { useToastStore } from '@/stores/toastStore'
 import { useLanguageStore } from '@/stores/languageStore'
 import NotificationBell from '@/components/notifications/NotificationBell.vue'
+import logo from '@/assets/images/logo.png'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -268,11 +270,9 @@ function handleLogout() {
 }
 
 function switchAccount() {
-  // Déconnecter l'utilisateur actuel
   authStore.logout()
   toastStore.info(t('messages.switchAccount'))
   mobileMenuOpen.value = false
-  // Ouvrir le modal de connexion
   window.appModals?.openLogin()
 }
 </script>

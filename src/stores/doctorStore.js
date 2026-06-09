@@ -1,6 +1,4 @@
-/**
- * Store des médecins Pinia
- */
+
 
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -12,7 +10,6 @@ export const useDoctorStore = defineStore('doctors', () => {
   const loading = ref(false)
   const error = ref(null)
 
-  // Lister tous les médecins
   async function fetchDoctors() {
     loading.value = true
     error.value = null
@@ -28,7 +25,6 @@ export const useDoctorStore = defineStore('doctors', () => {
     }
   }
 
-  // Obtenir les détails d'un médecin
   async function getDoctorById(id) {
     loading.value = true
     error.value = null
@@ -44,7 +40,6 @@ export const useDoctorStore = defineStore('doctors', () => {
     }
   }
 
-  // Mettre à jour le profil médecin
   async function updateDoctorProfile(data) {
     loading.value = true
     error.value = null
@@ -60,7 +55,6 @@ export const useDoctorStore = defineStore('doctors', () => {
     }
   }
 
-  // Récupérer le tableau de bord médecin
   async function getDashboard() {
     loading.value = true
     error.value = null
@@ -75,7 +69,6 @@ export const useDoctorStore = defineStore('doctors', () => {
     }
   }
 
-  // Récupérer les rendez-vous du médecin
   async function getDoctorAppointments(filters = {}) {
     loading.value = true
     error.value = null
@@ -90,7 +83,6 @@ export const useDoctorStore = defineStore('doctors', () => {
     }
   }
 
-  // Confirmer un rendez-vous
   async function confirmAppointment(appointmentId) {
     loading.value = true
     error.value = null
@@ -121,7 +113,6 @@ export const useDoctorStore = defineStore('doctors', () => {
     }
   }
 
-  // Marquer un rendez-vous comme complété
   async function completeAppointment(appointmentId, doctorNotes = '') {
     loading.value = true
     error.value = null

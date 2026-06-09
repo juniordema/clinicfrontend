@@ -1,17 +1,17 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex flex-col">
-    <!-- Navbar -->
+    
     <AppNavbar />
 
-    <!-- Contenu principal -->
+    
     <main class="flex-1">
       <router-view />
     </main>
 
-    <!-- Chat Assistant -->
+    
     <ChatAssistant />
 
-    <!-- Modaux -->
+    
     <LoginModal
       :isOpen="showLoginModal"
       @close="showLoginModal = false"
@@ -24,7 +24,7 @@
     />
     <AppointmentModal :isOpen="showAppointmentModal" @close="showAppointmentModal = false" />
 
-    <!-- Notifications et toasts -->
+    
     <ToastContainer />
   </div>
 </template>
@@ -46,7 +46,6 @@ const showRegisterModal = ref(false)
 const showAppointmentModal = ref(false)
 
 onMounted(() => {
-  // Initialiser l'auth depuis localStorage
   authStore.initializeAuth()
 })
 
@@ -60,7 +59,6 @@ function switchModals(to) {
   }
 }
 
-// Exposer les modaux pour utilisation globale
 window.appModals = {
   openLogin: () => (showLoginModal.value = true),
   closeLogin: () => (showLoginModal.value = false),

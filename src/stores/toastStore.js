@@ -1,6 +1,4 @@
-/**
- * Store des toasts Pinia - Notifications visuelles
- */
+
 
 import { defineStore } from 'pinia'
 import { ref } from 'vue'

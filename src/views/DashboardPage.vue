@@ -3,14 +3,14 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <DashboardHeader />
       
-      <!-- Dashboard Patient -->
+      
       <template v-if="!isDoctor">
         <DashboardStats />
         <NextAppointment />
         <AppointmentHistory />
       </template>
 
-      <!-- Dashboard Médecin -->
+      
       <template v-else>
         <div class="bg-white rounded-2xl shadow-sm p-8 border border-warm-200">
           <h2 class="text-2xl font-bold text-warm-900 mb-6">📋 {{ $t('dashboard.doctorAppointments') }}</h2>

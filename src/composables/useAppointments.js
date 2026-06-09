@@ -20,7 +20,6 @@ const dayNames = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam']
 const monthNames = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc']
 const monthFull = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre']
 
-// Watcher auto : récupère les créneaux pris quand médecin + date changent
 watch([selectedDoctor, selectedDate], async ([doctor, date]) => {
   bookedTimes.splice(0)
   if (!doctor || !date) return
@@ -28,7 +27,7 @@ watch([selectedDoctor, selectedDate], async ([doctor, date]) => {
     const res = await fetch(`http://localhost:3000/api/slots?doctorId=${doctor.id}&date=${date}`)
     const json = await res.json()
     bookedTimes.push(...(json.taken || []))
-  } catch { /* silencieux si API indisponible */ }
+  } catch {  }
 })
 
 export function useAppointments() {
@@ -36,7 +35,6 @@ export function useAppointments() {
   const { isLoggedIn, openLogin } = useAuth()
   const api = useApi()
 
-  // mode: null=affiche le choix | 'guest'=force invité | 'account'=force compte
   function openAppointment(prefillService = null, mode = null) {
     forcedMode.value = mode
     selectedService.value = prefillService || null
@@ -64,7 +62,6 @@ export function useAppointments() {
   function nextStep() { if (appointmentStep.value < 4) appointmentStep.value++ }
   function prevStep() { if (appointmentStep.value > 1) appointmentStep.value-- }
 
-  // Dates disponibles : 10 prochains jours hors dimanche
   const availableDates = computed(() => {
     const dates = []
     const d = new Date()
@@ -80,13 +77,11 @@ export function useAppointments() {
     return dates
   })
 
-  // Créneaux disponibles = tous - ceux déjà réservés
   const availableTimes = computed(() => {
     if (!selectedDoctor.value || !selectedDate.value) return []
     return allTimes.filter(t => !bookedTimes.includes(t))
   })
 
-  // Charger les RDV du patient depuis l'API
   async function loadPatientAppointments() {
     if (!isLoggedIn.value) return
     isLoading.value = true
@@ -101,7 +96,6 @@ export function useAppointments() {
     }
   }
 
-  // Créer un RDV via l'API
   async function confirmAppointment() {
     isLoading.value = true
     try {
@@ -124,7 +118,6 @@ export function useAppointments() {
     }
   }
 
-  // Annuler un RDV
   async function cancelAppointment(id) {
     try {
       const updated = await api.patch(`/appointments/${id}/cancel`)
@@ -140,7 +133,6 @@ export function useAppointments() {
   const pastCount    = computed(() => patientAppointments.filter(a => a.status !== 'à venir').length)
   const nextAppointment = computed(() => patientAppointments.find(a => a.status === 'à venir') || null)
 
-  // Helpers de formatage — protégés contre les valeurs vides
   function getDayName(dateStr) {
     if (!dateStr) return ''
     return dayNames[new Date(dateStr + 'T00:00:00').getDay()] || ''

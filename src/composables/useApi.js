@@ -1,7 +1,4 @@
-/**
- * useApi — couche HTTP centralisée.
- * Ajoute automatiquement le JWT dans chaque requête.
- */
+
 
 const BASE_URL = 'http://localhost:3000/api'
 

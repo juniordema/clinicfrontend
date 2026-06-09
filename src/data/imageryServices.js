@@ -1,6 +1,4 @@
-/**
- * Données des services d'imagerie médicale
- */
+
 
 export const imageryServices = [
   {

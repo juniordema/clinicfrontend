@@ -1,6 +1,4 @@
-/**
- * Store d'authentification Pinia
- */
+
 
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
@@ -12,13 +10,11 @@ export const useAuthStore = defineStore('auth', () => {
   const loading = ref(false)
   const error = ref(null)
 
-  // Computed
   const isAuthenticated = computed(() => !!token.value && !!user.value)
   const isDoctor = computed(() => user.value?.role === 'doctor')
   const isAdmin = computed(() => user.value?.role === 'admin')
   const isPatient = computed(() => user.value?.role === 'patient')
 
-  // Charger l'état depuis localStorage au démarrage
   function initializeAuth() {
     const savedToken = localStorage.getItem('auth_token')
     const savedUser = localStorage.getItem('user')
@@ -29,7 +25,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  // Inscription
   async function register(data) {
     loading.value = true
     error.value = null
@@ -38,13 +33,11 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = response.data.token
       user.value = response.data.user
       
-      // Sauvegarder dans localStorage
       localStorage.setItem('auth_token', token.value)
       localStorage.setItem('user', JSON.stringify(user.value))
       
       return response.data
     } catch (err) {
-      // Gérer les erreurs du backend
       const errorMessage = err.response?.data?.error?.message || 
                           err.response?.data?.message ||
                           err.response?.data?.error ||
@@ -58,7 +51,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  // Connexion
   async function login(email, password) {
     loading.value = true
     error.value = null
@@ -67,13 +59,11 @@ export const useAuthStore = defineStore('auth', () => {
       token.value = response.data.token
       user.value = response.data.user
       
-      // Sauvegarder dans localStorage
       localStorage.setItem('auth_token', token.value)
       localStorage.setItem('user', JSON.stringify(user.value))
       
       return response.data
     } catch (err) {
-      // Gérer les erreurs du backend
       const errorMessage = err.response?.data?.error?.message || 
                           err.response?.data?.message ||
                           err.response?.data?.error ||
@@ -87,7 +77,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  // Déconnexion
   function logout() {
     token.value = null
     user.value = null
@@ -96,7 +85,6 @@ export const useAuthStore = defineStore('auth', () => {
     localStorage.removeItem('user')
   }
 
-  // Obtenir le profil
   async function getProfile() {
     loading.value = true
     error.value = null
@@ -112,7 +100,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  // Mettre à jour le profil
   async function updateProfile(data) {
     loading.value = true
     error.value = null
@@ -129,7 +116,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  // Changer le mot de passe
   async function changePassword(currentPassword, newPassword, confirmPassword) {
     loading.value = true
     error.value = null

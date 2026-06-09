@@ -1,6 +1,4 @@
-/**
- * Store des créneaux disponibles Pinia
- */
+
 
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -13,7 +11,6 @@ export const useSlotsStore = defineStore('slots', () => {
   const loading = ref(false)
   const error = ref(null)
 
-  // Récupérer les créneaux disponibles pour une date
   async function fetchAvailableSlots(doctorId, date) {
     loading.value = true
     error.value = null
@@ -32,7 +29,6 @@ export const useSlotsStore = defineStore('slots', () => {
     }
   }
 
-  // Récupérer la disponibilité pour la semaine
   async function fetchWeekAvailability(doctorId, startDate) {
     loading.value = true
     error.value = null
@@ -50,7 +46,6 @@ export const useSlotsStore = defineStore('slots', () => {
     }
   }
 
-  // Vérifier la disponibilité d'un créneau spécifique
   async function checkSlotAvailability(doctorId, date, time) {
     try {
       const response = await apiClient.post('/slots/check', {

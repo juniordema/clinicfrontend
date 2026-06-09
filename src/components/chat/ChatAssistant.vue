@@ -1,8 +1,8 @@
 <template>
-  <!-- Bouton flottant -->
+  
   <div class="fixed bottom-5 right-5 z-[200]">
 
-    <!-- Bulle de bienvenue -->
+    
     <Transition name="bubble">
       <div v-if="showBubble && !chatOpen"
         class="absolute bottom-16 right-0 bg-white rounded-2xl rounded-br-sm shadow-xl border border-gray-100 p-3 w-56 mb-2">
@@ -14,14 +14,14 @@
       </div>
     </Transition>
 
-    <!-- Fenêtre de chat -->
+    
     <Transition name="chat">
       <div v-if="chatOpen"
         class="fixed sm:absolute inset-0 sm:inset-auto sm:bottom-16 sm:right-0 bg-white sm:w-80 sm:rounded-3xl sm:shadow-2xl sm:border sm:border-gray-100 flex flex-col z-[200]">
 
-        <!-- Header -->
+        
         <div class="bg-gradient-to-r from-emerald-600 to-emerald-500 px-4 py-3 flex items-center gap-3 sm:rounded-t-3xl">
-          <!-- Bouton retour mobile -->
+          
           <button @click="chatOpen = false" class="sm:hidden w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center text-white">
             <i class="fas fa-arrow-left text-sm"></i>
           </button>
@@ -40,7 +40,7 @@
           </button>
         </div>
 
-        <!-- Messages -->
+        
         <div class="flex-1 overflow-y-auto p-4 space-y-3 overscroll-contain" ref="chatContainer"
           style="background: linear-gradient(180deg, #f9fafb 0%, #ffffff 100%);">
           <div v-for="(msg, i) in messages" :key="i"
@@ -57,7 +57,7 @@
             </div>
           </div>
 
-          <!-- Typing indicator -->
+          
           <div v-if="isTyping" class="flex gap-2">
             <div class="w-7 h-7 rounded-full bg-emerald-100 flex items-center justify-center shrink-0">
               <i class="fas fa-robot text-emerald-600 text-xs"></i>
@@ -68,7 +68,7 @@
           </div>
         </div>
 
-        <!-- Suggestions rapides -->
+        
         <div v-if="messages.length <= 2" class="px-4 pb-2 flex flex-wrap gap-1.5">
           <button v-for="s in suggestions" :key="s"
             @click="send(s)"
@@ -77,7 +77,7 @@
           </button>
         </div>
 
-        <!-- Input -->
+        
         <div class="p-3 border-t border-gray-100 flex gap-2 bg-white sm:rounded-b-3xl">
           <input
             v-model="inputText"
@@ -95,7 +95,7 @@
       </div>
     </Transition>
 
-    <!-- Bouton principal -->
+    
     <button @click="toggleChat"
       class="w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center transition-all active:scale-95"
       :class="chatOpen ? 'bg-gray-700 hover:bg-gray-800' : 'bg-emerald-500 hover:bg-emerald-600'">
@@ -203,7 +203,6 @@ function toggleChat() {
   if (chatOpen.value) nextTick(() => scrollBottom())
 }
 
-// Afficher la bulle de bienvenue après 3s
 onMounted(() => {
   setTimeout(() => { showBubble.value = true }, 3000)
   setTimeout(() => { showBubble.value = false }, 10000)

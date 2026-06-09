@@ -1,6 +1,4 @@
-/**
- * Store des notifications Pinia
- */
+
 
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
@@ -13,10 +11,8 @@ export const useNotificationStore = defineStore('notifications', () => {
   const error = ref(null)
   const showNotifications = ref(false)
 
-  // Computed
   const unreadNotifications = computed(() => notifications.value.filter(n => !n.isRead))
 
-  // Récupérer les notifications
   async function fetchNotifications(unreadOnly = false, limit = 20) {
     loading.value = true
     error.value = null
@@ -35,7 +31,6 @@ export const useNotificationStore = defineStore('notifications', () => {
     }
   }
 
-  // Récupérer le nombre de notifications non lues
   async function fetchUnreadCount() {
     try {
       const response = await apiClient.get('/notifications/unread-count')
@@ -46,12 +41,10 @@ export const useNotificationStore = defineStore('notifications', () => {
     }
   }
 
-  // Mettre à jour le count local
   function updateUnreadCount() {
     unreadCount.value = unreadNotifications.value.length
   }
 
-  // Marquer une notification comme lue
   async function markAsRead(notificationId) {
     try {
       await apiClient.patch(`/notifications/${notificationId}/read`)
@@ -66,7 +59,6 @@ export const useNotificationStore = defineStore('notifications', () => {
     }
   }
 
-  // Marquer toutes les notifications comme lues
   async function markAllAsRead() {
     try {
       await apiClient.patch('/notifications/read-all')
@@ -80,7 +72,6 @@ export const useNotificationStore = defineStore('notifications', () => {
     }
   }
 
-  // Supprimer une notification
   async function deleteNotification(notificationId) {
     try {
       await apiClient.delete(`/notifications/${notificationId}`)
@@ -91,7 +82,6 @@ export const useNotificationStore = defineStore('notifications', () => {
     }
   }
 
-  // Basculer l'affichage du panneau de notifications
   function toggleNotifications() {
     showNotifications.value = !showNotifications.value
   }

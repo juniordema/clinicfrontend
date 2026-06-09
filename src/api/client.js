@@ -1,6 +1,4 @@
-/**
- * API Client - Instance Axios configurée
- */
+
 
 import axios from 'axios'
 
@@ -14,7 +12,6 @@ export const apiClient = axios.create({
   }
 })
 
-// Intercepteur pour ajouter le token JWT
 apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('auth_token')
@@ -26,7 +23,6 @@ apiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
-// Intercepteur pour gérer les erreurs
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -34,11 +30,9 @@ apiClient.interceptors.response.use(
     const isAuthRequest = requestUrl.includes('/auth/login') || requestUrl.includes('/auth/register')
     const hasStoredToken = !!localStorage.getItem('auth_token')
 
-    // Si erreur 401 sur une session existante, nettoyer puis rediriger
     if (error.response?.status === 401 && hasStoredToken && !isAuthRequest) {
       localStorage.removeItem('auth_token')
       localStorage.removeItem('user')
-      // Rediriger vers la page d'accueil (la route / existe)
       window.location.href = '/'
     }
     return Promise.reject(error)

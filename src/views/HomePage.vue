@@ -32,7 +32,6 @@ import { useScrollAnimation } from '@/composables/useScrollAnimation'
 const authStore = useAuthStore()
 const appointmentStore = useAppointmentStore()
 
-// Initialiser les animations de scroll
 useScrollAnimation()
 
 onMounted(() => {

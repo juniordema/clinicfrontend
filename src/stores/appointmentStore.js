@@ -1,6 +1,4 @@
-/**
- * Store des rendez-vous Pinia
- */
+
 
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -11,7 +9,6 @@ export const useAppointmentStore = defineStore('appointments', () => {
   const loading = ref(false)
   const error = ref(null)
 
-  // Récupérer les rendez-vous de l'utilisateur
   async function fetchMyAppointments() {
     loading.value = true
     error.value = null
@@ -27,7 +24,6 @@ export const useAppointmentStore = defineStore('appointments', () => {
     }
   }
 
-  // Créer un rendez-vous
   async function createAppointment(data) {
     loading.value = true
     error.value = null
@@ -43,7 +39,6 @@ export const useAppointmentStore = defineStore('appointments', () => {
     }
   }
 
-  // Créer un rendez-vous sans compte
   async function createGuestAppointment(data) {
     loading.value = true
     error.value = null
@@ -58,7 +53,6 @@ export const useAppointmentStore = defineStore('appointments', () => {
     }
   }
 
-  // Récupérer un rendez-vous
   async function getAppointment(id) {
     loading.value = true
     error.value = null
@@ -73,7 +67,6 @@ export const useAppointmentStore = defineStore('appointments', () => {
     }
   }
 
-  // Modifier un rendez-vous
   async function updateAppointment(id, data) {
     loading.value = true
     error.value = null
@@ -92,7 +85,6 @@ export const useAppointmentStore = defineStore('appointments', () => {
     }
   }
 
-  // Annuler un rendez-vous
   async function cancelAppointment(id) {
     loading.value = true
     error.value = null
@@ -111,7 +103,6 @@ export const useAppointmentStore = defineStore('appointments', () => {
     }
   }
 
-  // Supprimer un rendez-vous
   async function deleteAppointment(id) {
     loading.value = true
     error.value = null

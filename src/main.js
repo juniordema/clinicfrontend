@@ -7,13 +7,10 @@ import './style.css'
 
 const app = createApp(App)
 
-// Utiliser i18n
 app.use(i18n)
 
-// Utiliser Pinia pour la gestion d'état
 app.use(createPinia())
 
-// Utiliser le routeur
 app.use(router)
 
 app.mount('#app')

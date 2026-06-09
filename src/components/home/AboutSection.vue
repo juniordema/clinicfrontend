@@ -5,7 +5,7 @@
         <div class="anim-scroll">
           <div class="relative">
             <div class="absolute -top-4 -left-4 w-full h-full rounded-3xl border-2 border-primary-200"></div>
-            <img src="https://picsum.photos/seed/clinic-interior-modern/600/500.jpg" alt="Intérieur de la clinique" class="relative rounded-3xl w-full object-cover shadow-lg" style="height: 420px">
+            <img src="https://picsum.photos/seed/clinic-interior-modern/600/500.jpp" alt="Intérieur de la clinique" class="relative rounded-3xl w-full object-cover shadow-lg" style="height: 420px">
           </div>
         </div>
         <div>

@@ -3,15 +3,15 @@
     <Transition name="modal">
       <div v-if="isOpen" class="fixed inset-0 z-40 flex items-center justify-center bg-black/50 backdrop-blur-sm">
         <div class="bg-white rounded-lg shadow-2xl w-full max-w-md p-8 max-h-[90vh] overflow-y-auto">
-          <!-- Header -->
+          
           <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-2">{{ $t('auth.register') }}</h2>
             <p class="text-gray-600 text-sm">{{ $t('auth.title') }}</p>
           </div>
 
-          <!-- Formulaire -->
+          
           <form @submit.prevent="handleRegister" class="space-y-4">
-            <!-- Prénom -->
+            
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">{{ $t('auth.firstName') }}</label>
               <input
@@ -23,7 +23,7 @@
               />
             </div>
 
-            <!-- Nom -->
+            
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">{{ $t('auth.lastName') }}</label>
               <input
@@ -35,7 +35,7 @@
               />
             </div>
 
-            <!-- Email -->
+            
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">{{ $t('auth.email') }}</label>
               <input
@@ -47,7 +47,7 @@
               />
             </div>
 
-            <!-- Téléphone -->
+            
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">{{ $t('auth.phone') }} ({{ $t('validation.fieldRequired').toLowerCase() }})</label>
               <input
@@ -58,7 +58,7 @@
               />
             </div>
 
-            <!-- Mot de passe -->
+            
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">{{ $t('auth.password') }}</label>
               <div class="relative">
@@ -79,7 +79,7 @@
               </div>
             </div>
 
-            <!-- Confirmation mot de passe -->
+            
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">{{ $t('auth.confirmPassword') }}</label>
               <input
@@ -91,12 +91,12 @@
               />
             </div>
 
-            <!-- Message d'erreur -->
+            
             <div v-if="error" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm">
               {{ error }}
             </div>
 
-            <!-- Boutons -->
+            
             <button
               type="submit"
               :disabled="loading"
@@ -114,7 +114,7 @@
             </button>
           </form>
 
-          <!-- Lien connexion -->
+          
           <p class="text-center text-gray-600 text-sm mt-4">
             {{ $t('auth.haveAccount') }}
             <button
@@ -163,10 +163,8 @@ const error = ref('')
 const emit = defineEmits(['close', 'switch-to-login'])
 
 async function handleRegister() {
-  // Réinitialiser l'erreur
   error.value = ''
 
-  // Validation: Prénom
   if (!form.value.firstName?.trim()) {
     error.value = 'Prénom requis'
     return
@@ -176,7 +174,6 @@ async function handleRegister() {
     return
   }
 
-  // Validation: Nom
   if (!form.value.lastName?.trim()) {
     error.value = 'Nom requis'
     return
@@ -186,7 +183,6 @@ async function handleRegister() {
     return
   }
 
-  // Validation: Email strict
   const emailError = getEmailError(form.value.email)
   if (emailError) {
     error.value = emailError
@@ -198,7 +194,6 @@ async function handleRegister() {
     return
   }
 
-  // Validation: Téléphone (optionnel, mais si fourni, validation stricte)
   if (form.value.phone?.trim()) {
     const phoneError = getPhoneError(form.value.phone)
     if (phoneError) {
@@ -212,7 +207,6 @@ async function handleRegister() {
     }
   }
 
-  // Validation: Mot de passe
   if (!form.value.password) {
     error.value = 'Mot de passe requis'
     return
@@ -241,7 +235,6 @@ async function handleRegister() {
     })
     toastStore.success('Inscription réussie ! Vous êtes connecté.')
     emit('close')
-    // Réinitialiser le formulaire
     form.value = {
       firstName: '',
       lastName: '',
@@ -250,7 +243,6 @@ async function handleRegister() {
       password: '',
       confirmPassword: ''
     }
-    // Rediriger vers le dashboard
     await router.push('/dashboard')
   } catch (err) {
     console.error('Erreur inscription:', err)

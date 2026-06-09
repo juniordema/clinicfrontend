@@ -3,15 +3,15 @@
     <Transition name="modal">
       <div v-if="isOpen" class="fixed inset-0 z-40 flex items-center justify-center bg-black/50 backdrop-blur-sm">
         <div class="bg-white rounded-lg shadow-2xl w-full max-w-md p-8">
-          <!-- Header -->
+          
           <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-2">{{ $t('auth.login') }}</h2>
             <p class="text-gray-600 text-sm">{{ $t('auth.login') }}</p>
           </div>
 
-          <!-- Formulaire -->
+          
           <form @submit.prevent="handleLogin" class="space-y-4">
-            <!-- Email -->
+            
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">{{ $t('auth.email') }}</label>
               <input
@@ -23,7 +23,7 @@
               />
             </div>
 
-            <!-- Mot de passe -->
+            
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">{{ $t('auth.password') }}</label>
               <div class="relative">
@@ -44,12 +44,12 @@
               </div>
             </div>
 
-            <!-- Message d'erreur -->
+            
             <div v-if="error" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded text-sm">
               {{ error }}
             </div>
 
-            <!-- Boutons -->
+            
             <button
               type="submit"
               :disabled="loading"
@@ -67,7 +67,7 @@
             </button>
           </form>
 
-          <!-- Lien inscription -->
+          
           <p class="text-center text-gray-600 text-sm mt-4">
             {{ $t('auth.noAccount') }}
             <button
@@ -120,9 +120,7 @@ async function handleLogin() {
     await authStore.login(form.value.email, form.value.password)
     toastStore.success('Connexion réussie !')
     emit('close')
-    // Réinitialiser le formulaire
     form.value = { email: '', password: '' }
-    // Rediriger vers le dashboard
     await router.push('/dashboard')
   } catch (err) {
     const apiError = err.response?.data?.error || err.response?.data?.message || authStore.error

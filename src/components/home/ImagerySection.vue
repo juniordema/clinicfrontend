@@ -1,7 +1,7 @@
 <template>
   <section id="imagerie" class="py-20 bg-gradient-to-b from-white to-warm-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Header -->
+      
       <div class="text-center mb-16">
         <h2 class="font-display font-bold text-4xl sm:text-5xl text-warm-900 mb-4">
           🏥 {{ $t('imaging.title') }}
@@ -11,7 +11,7 @@
         </p>
       </div>
 
-      <!-- Services Grid -->
+      
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
         <button
           v-for="service in localizedImageryServices"
@@ -28,10 +28,10 @@
         </button>
       </div>
 
-      <!-- Service Detail -->
+      
       <div v-if="selectedService" class="bg-white rounded-2xl shadow-lg p-8 border-2 border-teal-200">
         <div class="grid md:grid-cols-2 gap-8">
-          <!-- Left: Icon & Title -->
+          
           <div class="flex flex-col items-center md:items-start justify-center">
             <div class="flex items-center justify-center w-24 h-24 rounded-3xl bg-teal-100 mb-6">
               <i :class="selectedService.icon" class="text-5xl text-teal-600"></i>
@@ -44,7 +44,7 @@
             </div>
           </div>
 
-          <!-- Right: Benefits -->
+          
           <div>
             <h4 class="text-2xl font-bold text-gray-900 mb-6">{{ $t('imaging.benefits') }}</h4>
             <div class="space-y-4">
@@ -58,7 +58,7 @@
               </div>
             </div>
 
-            <!-- Call to action -->
+            
             <button
               @click="openAppointment"
               class="w-full mt-8 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl transition"
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <!-- Stats -->
+      
       <div class="grid md:grid-cols-4 gap-6 mt-16">
         <div class="bg-white rounded-2xl p-6 border-2 border-warm-200 text-center">
           <p class="text-4xl font-bold text-teal-600 mb-2">8+</p>

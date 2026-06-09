@@ -18,7 +18,6 @@ const router = createRouter({
   }
 })
 
-// Garde globale pour les routes protégées
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   

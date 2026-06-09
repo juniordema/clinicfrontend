@@ -2,18 +2,18 @@
   <Teleport to="body">
     <Transition name="modal">
       <div v-if="isOpen" class="fixed inset-0 z-[300] flex items-end sm:items-center justify-center">
-        <!-- Overlay -->
+        
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="closeAppointment"></div>
 
-        <!-- Sheet mobile / Modal desktop -->
+        
         <div class="relative bg-white w-full sm:max-w-lg sm:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[88vh]">
 
-          <!-- Handle mobile -->
+          
           <div class="flex justify-center pt-3 pb-1 sm:hidden">
             <div class="w-10 h-1 rounded-full bg-gray-200"></div>
           </div>
 
-          <!-- Header sticky -->
+          
           <div class="px-5 pt-2 pb-4 border-b border-gray-100 sticky top-0 bg-white rounded-t-3xl z-10">
             <div class="flex items-center justify-between mb-3">
               <div>
@@ -25,7 +25,7 @@
               </button>
             </div>
 
-            <!-- Barre de progression -->
+            
             <div class="flex gap-1.5">
               <div v-for="s in totalSteps" :key="s"
                 class="h-1 rounded-full flex-1 transition-all duration-300"
@@ -33,7 +33,7 @@
               </div>
             </div>
 
-            <!-- Labels étapes -->
+            
             <div class="flex justify-between mt-1.5 px-0.5">
               <span v-for="(label, i) in stepLabels" :key="i"
                 class="text-[10px] transition-colors"
@@ -43,14 +43,14 @@
             </div>
           </div>
 
-          <!-- Contenu scrollable -->
+          
           <div class="flex-1 overflow-y-auto overscroll-contain px-5 py-4">
 
-            <!-- ── Étape 0 : Invité ou Connecté ── -->
+            
             <div v-if="step === 0">
               <p class="text-gray-500 text-sm mb-5">{{ $t('appointment.howToContinue') }}</p>
               <div class="space-y-3">
-                <!-- Sans compte -->
+                
                 <button @click="chooseGuest"
                   class="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-emerald-300 hover:bg-emerald-50 active:scale-[0.98] transition-all text-left">
                   <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center shrink-0">
@@ -63,7 +63,7 @@
                   <i class="fas fa-chevron-right text-gray-300"></i>
                 </button>
 
-                <!-- Avec compte -->
+                
                 <button @click="chooseAccount"
                   class="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-blue-300 hover:bg-blue-50 active:scale-[0.98] transition-all text-left">
                   <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center shrink-0">
@@ -78,7 +78,7 @@
               </div>
             </div>
 
-            <!-- ── Étape 1 : Infos patient (invité) ── -->
+            
             <div v-if="step === 1 && isGuest">
               <p class="text-gray-500 text-sm mb-4">{{ $t('appointment.yourDetails') }}</p>
               <div class="space-y-3">
@@ -107,7 +107,7 @@
               </div>
             </div>
 
-            <!-- ── Étape 1 : Choix service ── -->
+            
             <div v-if="(step === 1 && !isGuest) || step === 2">
               <p class="text-gray-500 text-sm mb-3">{{ $t('appointment.selectSpecialty') }}</p>
               <div class="grid gap-2">
@@ -124,7 +124,7 @@
               </div>
             </div>
 
-            <!-- ── Étape médecin ── -->
+            
             <div v-if="(isGuest && step === 3) || (!isGuest && step === 2)">
               <p class="text-gray-500 text-sm mb-3">{{ $t('appointment.selectDoctorPrompt') }}</p>
               <div class="grid gap-3">
@@ -147,9 +147,9 @@
               </div>
             </div>
 
-            <!-- ── Étape date & heure ── -->
+            
             <div v-if="(isGuest && step === 4) || (!isGuest && step === 3)">
-              <!-- Dates -->
+              
               <p class="text-gray-500 text-sm mb-3">{{ $t('appointment.selectDatePrompt') }}</p>
               <div class="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1 snap-x">
                 <button v-for="d in availableDates" :key="d"
@@ -162,7 +162,7 @@
                 </button>
               </div>
 
-              <!-- Créneaux horaires -->
+              
               <div v-if="selectedDate" class="mt-5">
                 <div class="flex items-center justify-between mb-3">
                   <p class="text-gray-500 text-sm">{{ $t('appointment.availableSlots') }}</p>
@@ -188,18 +188,18 @@
                 </div>
               </div>
 
-              <!-- Note durée -->
+              
               <p class="text-xs text-gray-400 mt-3 flex items-center gap-1.5">
                 <i class="fas fa-clock text-emerald-400"></i>
                 {{ $t('appointment.duration') }}
               </p>
             </div>
 
-            <!-- ── Étape confirmation ── -->
+            
             <div v-if="(isGuest && step === 5) || (!isGuest && step === 4)">
               <p class="text-gray-500 text-sm mb-4">{{ $t('appointment.review') }}</p>
 
-              <!-- Résumé -->
+              
               <div class="bg-gray-50 rounded-2xl p-4 space-y-3 mb-4">
                 <div v-if="isGuest" class="flex justify-between items-center pb-3 border-b border-gray-200">
                   <span class="text-gray-500 text-sm">{{ $t('appointment.patient') }}</span>
@@ -223,7 +223,7 @@
                 </div>
               </div>
 
-              <!-- Notes -->
+              
               <div class="mb-4">
                 <label class="text-xs font-semibold text-gray-600 mb-1.5 block">{{ $t('appointment.reason') }} <span class="text-gray-400 font-normal">({{ $t('common.optional') }})</span></label>
                 <textarea v-model="notes" rows="3"
@@ -232,13 +232,13 @@
                 </textarea>
               </div>
 
-              <!-- Info email -->
+              
               <div v-if="isGuest && guest.email" class="flex items-start gap-2 bg-blue-50 rounded-xl p-3 mb-4">
                 <i class="fas fa-envelope text-blue-400 mt-0.5"></i>
                 <p class="text-xs text-blue-600">{{ $t('appointment.emailSentTo') }} <strong>{{ guest.email }}</strong></p>
               </div>
 
-              <!-- Info email pour patient connecté -->
+              
               <div v-if="!isGuest && authStore.user?.email" class="flex items-start gap-2 bg-green-50 rounded-xl p-3 mb-4">
                 <i class="fas fa-envelope text-green-400 mt-0.5"></i>
                 <p class="text-xs text-green-600">{{ $t('appointment.emailSentTo') }} <strong>{{ authStore.user.email }}</strong></p>
@@ -247,16 +247,16 @@
 
           </div>
 
-          <!-- Footer boutons sticky -->
+          
           <div class="px-5 py-4 border-t border-gray-100 bg-white rounded-b-3xl">
             <div class="flex gap-3">
-              <!-- Retour -->
+              
               <button v-if="step > 0" @click="prevStep"
                 class="w-12 h-12 rounded-2xl border-2 border-gray-100 flex items-center justify-center text-gray-500 active:scale-95 transition-all shrink-0">
                 <i class="fas fa-arrow-left text-sm"></i>
               </button>
 
-              <!-- Confirmer (dernière étape) -->
+              
               <button v-if="isLastStep" @click="confirmAppointment" :disabled="isLoading"
                 class="flex-1 h-12 rounded-2xl bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-semibold text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all">
                 <i v-if="isLoading" class="fas fa-circle-notch fa-spin"></i>
@@ -264,7 +264,7 @@
                 {{ isLoading ? $t('appointment.booking') : $t('appointment.confirmButton') }}
               </button>
 
-              <!-- Suivant -->
+              
               <button v-else @click="nextStepGuard" :disabled="!canProceed"
                 class="flex-1 h-12 rounded-2xl bg-emerald-500 hover:bg-emerald-600 disabled:opacity-40 text-white font-semibold text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all">
                 {{ $t('buttons.next') }} <i class="fas fa-arrow-right"></i>
@@ -289,7 +289,6 @@ import { useDoctorStore } from '@/stores/doctorStore'
 import apiClient from '@/api/client'
 import { isValidEmail, isValidPhone, getEmailError, getPhoneError } from '@/utils/validation'
 
-// Props and emits
 const props = defineProps({
   isOpen: {
     type: Boolean,
@@ -305,7 +304,6 @@ const toastStore = useToastStore()
 const doctorStore = useDoctorStore()
 const { locale, t } = useI18n()
 
-// Docteurs chargés depuis l'API
 const doctors = ref([])
 const loadingDoctors = ref(false)
 
@@ -313,7 +311,6 @@ function closeAppointment() {
   emit('close')
 }
 
-// ── Charger les docteurs depuis l'API ────────────────
 async function fetchDoctors() {
   loadingDoctors.value = true
   try {
@@ -327,14 +324,12 @@ async function fetchDoctors() {
   }
 }
 
-// Charger les docteurs quand le modal s'ouvre
 watch(() => props.isOpen, (isOpen) => {
   if (isOpen && doctors.value.length === 0) {
     fetchDoctors()
   }
 })
 
-// ── État local ───────────────────────────────────────
 const isGuest   = ref(false)
 const step      = ref(0)
 const isLoading = ref(false)
@@ -350,9 +345,6 @@ const selectedTime    = ref('')
 const availableTimes  = ref([])
 const notes           = ref('')
 
-// ── Étapes dynamiques ───────────────────────────────
-// Invité  : 0=accueil 1=infos 2=service 3=médecin 4=date 5=confirm
-// Connecté: 0=accueil 1=service 2=médecin 3=date 4=confirm
 const totalSteps  = computed(() => isGuest.value ? 5 : 4)
 const stepLabels  = computed(() => isGuest.value
   ? [t('appointment.steps.welcome'), t('appointment.steps.details'), t('appointment.steps.service'), t('appointment.steps.doctor'), t('appointment.steps.date'), t('appointment.steps.confirmation')]
@@ -360,7 +352,6 @@ const stepLabels  = computed(() => isGuest.value
 )
 const isLastStep = computed(() => step.value === totalSteps.value)
 
-// ── Garde : peut-on passer à l'étape suivante ? ─────
 const canProceed = computed(() => {
   if (step.value === 0) return true
   if (isGuest.value) {
@@ -376,7 +367,6 @@ const canProceed = computed(() => {
   return true
 })
 
-// ── Dates disponibles ────────────────────────────────
 const availableDates = computed(() => {
   const dates = []
   const d = new Date()
@@ -402,19 +392,15 @@ function formatDate(s) {
   return new Intl.DateTimeFormat(locale.value === 'en' ? 'en-GB' : 'fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }).format(d)
 }
 
-// ── Réinitialiser le modal au bon état ──────────────
 function resetModal() {
-  // Si l'utilisateur est connecté, sauter l'étape 0
   if (authStore.isAuthenticated) {
     isGuest.value = false
     step.value = 1  // Aller directement à la sélection de service
   } else {
-    // Sinon, afficher le choix compte/sans compte
     isGuest.value = false
     step.value = 0
   }
   
-  // Réinitialiser les données
   selectedService.value = null
   selectedDoctor.value = null
   selectedDate.value = ''
@@ -424,25 +410,20 @@ function resetModal() {
   notes.value = ''
 }
 
-// ── Watcher pour détecter l'ouverture du modal ──────
 watch(() => props.isOpen, (isOpen) => {
   if (isOpen) {
     resetModal()
   }
 })
 
-// ── Médecins filtrés par service ─────────────────────
 const filteredDoctors = computed(() => {
   if (!selectedService.value) return doctors.value
   
   return doctors.value.filter(d => {
-    // Vérifier d'abord specialties (données statiques)
     if (d.specialties?.includes(selectedService.value.name)) return true
     
-    // Vérifier specialization (données API backend)
     if (d.specialization && d.specialization.includes(selectedService.value.name)) return true
     
-    // Mapping spécifique pour "Consultation Générale" <-> "Médecine Générale"
     if (selectedService.value.name === 'Consultation Générale' && 
         (d.specialization === 'Médecine Générale' || d.specialties?.includes('Consultation Générale'))) {
       return true
@@ -452,7 +433,6 @@ const filteredDoctors = computed(() => {
   })
 })
 
-// ── Charger les créneaux dispo automatiquement ───────
 async function fetchSlots(doctorId, date) {
   if (!doctorId || !date) { availableTimes.value = []; return }
   loadingSlots.value = true
@@ -479,7 +459,6 @@ function selectDate(d) {
   selectedTime.value = ''
 }
 
-// ── Navigation ───────────────────────────────────────
 function chooseGuest() {
   isGuest.value = true
   step.value = 1
@@ -489,7 +468,6 @@ function chooseAccount() {
   if (!authStore.isAuthenticated) {
     closeAppointment()
     toastStore.addToast(t('appointment.loginRequired'), 'info')
-    // Will redirect via router guard
     return
   }
   isGuest.value = false
@@ -506,14 +484,12 @@ function selectService(svc) {
 function validateGuestStep() {
   errors.value = {}
 
-  // Validation du nom
   if (!guest.value.name?.trim()) {
     errors.value.name = t('appointment.errors.nameRequired')
   } else if (guest.value.name.trim().length < 3 || guest.value.name.trim().length > 100) {
     errors.value.name = t('appointment.errors.nameLength')
   }
 
-  // Validation du téléphone - STRICT
   if (!guest.value.phone?.trim()) {
     errors.value.phone = t('appointment.errors.phoneRequired')
   } else {
@@ -525,7 +501,6 @@ function validateGuestStep() {
     }
   }
 
-  // Validation de l'email - STRICT
   if (!guest.value.email?.trim()) {
     errors.value.email = t('appointment.errors.emailRequired')
   } else {
@@ -549,15 +524,12 @@ function prevStep() {
   if (step.value > 0) step.value--
 }
 
-// ── Confirmation ─────────────────────────────────────
 async function confirmAppointment() {
-  // Validation: email obligatoire
   if (isGuest.value && !guest.value.email.trim()) {
     toastStore.addToast(t('appointment.errors.emailConfirmationRequired'), 'error')
     return
   }
 
-  // Pour patients connectés, vérifier que l'email existe
   if (!isGuest.value && !authStore.user?.email) {
     toastStore.addToast(t('appointment.errors.missingUserEmail'), 'error')
     return
@@ -612,9 +584,7 @@ function resetForm() {
   availableTimes.value = []
 }
 
-// Appliquer le mode forcé à l'ouverture - voir App.vue
 watch(() => authStore.isAuthenticated, () => {
-  // Auto-update when auth changes
 })
 </script>
 
