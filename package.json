@@ -1,26 +1,29 @@
 {
-  "name": "harmony-clinic",
-  "private": true,
+  "name": "clinicfrontend",
   "version": "1.0.0",
-  "type": "module",
+  "description": "",
+  "main": "index.ts",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 127.0.0.1",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "npm run build"
   },
+  "private": true,
   "dependencies": {
-    "axios": "^1.6.0",
-    "pinia": "^2.1.6",
-    "socket.io-client": "^4.7.2",
-    "vue": "^3.4.0",
-    "vue-i18n": "^9.13.1",
-    "vue-router": "^4.3.0"
+    "axios": "^1.7.9",
+    "pinia": "^2.3.1",
+    "vue": "^3.5.13",
+    "vue-i18n": "^9.14.2",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.0",
-    "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1",
-    "vite": "^5.1.0"
+    "@vitejs/plugin-vue": "^5.2.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3",
+    "vite": "^5.4.21"
   }
 }

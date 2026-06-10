@@ -1,15 +1,15 @@
 <template>
-  <footer class="bg-warm-900 text-warm-400 py-14">
+  <footer class="bg-warm-900 text-warm-400 py-14 border-t border-warm-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
-        <div>
+        <div class="lg:pr-4">
           <div class="flex items-center gap-2 mb-4">
-            <div class="w-9 h-9 rounded-lg bg-primary-500 flex items-center justify-center">
+            <div class="w-9 h-9 rounded-lg bg-primary-500 flex items-center justify-center shadow-lg shadow-primary-900/20">
               <i class="fas fa-heartbeat text-white"></i>
             </div>
             <span class="font-display font-bold text-lg text-white">Clinic Angelo</span>
           </div>
-          <p class="text-sm leading-relaxed">{{ $t('footer.description') }}</p>
+          <p class="text-sm leading-relaxed max-w-xs">{{ $t('footer.description') }}</p>
         </div>
         <div>
           <h4 class="font-semibold text-white mb-4">{{ $t('footer.quickLinks') }}</h4>
@@ -22,12 +22,11 @@
         <div>
           <h4 class="font-semibold text-white mb-4">{{ $t('nav.services') }}</h4>
           <ul class="space-y-2 text-sm">
-            <li v-for="s in localizedServices.slice(0,5)" :key="s.name">{{ s.displayName }}</li>
+            <li v-for="s in localizedServices.slice(0,5)" :key="s.name" class="text-warm-300">{{ s.displayName }}</li>
           </ul>
         </div>
         <div>
           <h4 class="font-semibold text-white mb-4">{{ $t('footer.followUs') }}</h4>
-          <p class="text-sm mb-4">{{ $t('footer.followUs') }}</p>
           <div class="flex gap-3">
             <a
               v-for="social in socialLinks"
@@ -35,7 +34,7 @@
               :href="social.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 rounded-lg bg-warm-800 hover:bg-primary-500 flex items-center justify-center transition-colors"
+              class="w-10 h-10 rounded-lg bg-warm-800 hover:bg-primary-500 flex items-center justify-center transition-colors border border-warm-700"
               :aria-label="social.label"
             >
               <i :class="social.icon" class="text-sm"></i>

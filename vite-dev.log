@@ -1,0 +1,53 @@
+
+> clinicfrontend@1.0.0 dev
+> vite --host 127.0.0.1 --port 5173
+
+
+  [32m[1mVITE[22m v5.4.21[39m  [2mready in [0m[1m550[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+[2m10:41:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/style.css, /src/components/home/NewFeaturesSection.vue[22m
+[2m10:41:19[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/NewFeaturesSection.vue, /src/style.css[22m
+[2m10:41:19[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/fr.json[22m
+[2m10:41:19[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/en.json[22m
+[2m10:44:40[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/style.css, /src/components/home/NewFeaturesSection.vue[22m
+[2m10:44:40[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/NewFeaturesSection.vue, /src/style.css[22m
+[2m10:44:40[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/fr.json[22m
+[2m10:44:40[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/en.json[22m
+[2m10:48:03[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/NewFeaturesSection.vue, /src/style.css[22m
+[2m10:48:03[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/layout/AppNavbar.vue, /src/style.css[22m
+[2m10:48:03[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/fr.json[22m
+[2m10:48:03[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/en.json[22m
+[2m10:51:08[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/style.css, /src/components/home/NewFeaturesSection.vue[22m
+[2m10:51:36[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/NewFeaturesSection.vue, /src/style.css[22m
+[2m10:51:52[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/NewFeaturesSection.vue, /src/style.css[22m
+[2m10:51:52[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/fr.json[22m
+[2m10:51:52[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/en.json[22m
+[2m10:55:21[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/HeroSection.vue, /src/style.css[22m
+[2m10:55:45[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/layout/AppNavbar.vue, /src/style.css[22m
+[2m10:55:53[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/layout/AppNavbar.vue?vue&type=style&index=0&scoped=39aa73b6&lang.css[22m
+[2m10:56:12[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/ServicesSection.vue, /src/style.css[22m
+[2m10:56:36[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/NewFeaturesSection.vue, /src/style.css[22m
+[2m10:56:48[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/DoctorsSection.vue, /src/style.css[22m
+[2m10:57:01[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/ContactSection.vue, /src/style.css[22m
+[2m10:57:08[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/style.css[22m
+[2m11:01:38[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/style.css, /src/components/home/NewFeaturesSection.vue[22m
+[2m11:02:05[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/NewFeaturesSection.vue, /src/style.css[22m
+[2m11:02:15[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/fr.json[22m
+[2m11:02:15[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/en.json[22m
+[2m11:06:20[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/style.css, /src/components/home/NewFeaturesSection.vue[22m
+[2m11:07:03[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/NewFeaturesSection.vue, /src/style.css[22m
+[2m11:07:13[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/fr.json[22m
+[2m11:07:13[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/en.json[22m
+[2m11:10:06[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/style.css, /src/components/home/NewFeaturesSection.vue[22m
+[2m11:10:22[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/NewFeaturesSection.vue, /src/style.css[22m
+[2m11:12:38[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.vue?vue&type=style&index=0&scoped=7a7a37b1&lang.css, /src/App.vue, /src/style.css[22m
+[2m11:12:59[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/StatsSection.vue, /src/style.css[22m
+[2m11:13:21[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/AboutSection.vue, /src/style.css[22m
+[2m11:13:40[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/TestimonialsSection.vue, /src/style.css[22m
+[2m11:13:58[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/CtaSection.vue, /src/style.css[22m
+[2m11:14:14[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/layout/AppFooter.vue, /src/style.css[22m
+[2m11:14:24[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/AboutSection.vue, /src/style.css[22m
+[2m11:14:32[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/home/ImagerySection.vue, /src/style.css[22m
+[2m11:14:37[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/style.css[22m

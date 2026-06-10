@@ -2,6 +2,7 @@
   "nav": {
     "home": "Accueil",
     "services": "Services",
+    "newFeatures": "Marketing Hub",
     "imaging": "Imagerie",
     "doctors": "Médecins",
     "contact": "Contact",
@@ -38,6 +39,52 @@
     "subtitle": "Nos spécialités",
     "description": "Découvrez nos services médicaux de qualité",
     "bookNow": "Prendre RDV"
+  },
+  "features": {
+    "eyebrow": "Marketing Hub",
+    "title": "Gestion éditoriale et réseaux sociaux",
+    "description": "Centralisez la création, l'organisation, la planification, la diffusion sociale et l'optimisation des contenus de la clinique.",
+    "workflow": "Cycle de publication",
+    "steps": {
+      "draft": "Création",
+      "watch": "Veille",
+      "seo": "SEO",
+      "schedule": "Planification",
+      "distribute": "Diffusion",
+      "publish": "Publication"
+    },
+    "analytics": {
+      "chartTitle": "Suivi par réseau social",
+      "chartDescription": "Volume de publications et interactions générées par canal.",
+      "monthLabel": "Mois en cours",
+      "posts": "publications",
+      "interactions": "interactions",
+      "tableTitle": "Performance des contenus",
+      "sortedBy": "Trié par engagement",
+      "content": "Contenu",
+      "channel": "Canal",
+      "engagement": "Engagement",
+      "status": "Statut"
+    },
+    "watch": {
+      "sourcesTitle": "Sources médicales",
+      "sourcesDescription": "Agrégation d'actualités depuis des sources validées.",
+      "topicsTitle": "Sujets suggérés",
+      "topicsDescription": "Idées de contenus basées sur les tendances du secteur.",
+      "trendsTitle": "Veille concurrentielle",
+      "trendsDescription": "Signaux sociaux et opportunités de communication."
+    },
+    "operations": {
+      "eyebrow": "Pilotage opérationnel",
+      "title": "Calendrier, campagnes et assistance IA",
+      "description": "Organisez les publications, coordonnez les campagnes, préparez les contenus médicaux et suivez les rapports digitaux au même endroit.",
+      "calendarTitle": "Calendrier éditorial",
+      "remindersTitle": "Rappels de publication",
+      "campaignsTitle": "Campagnes",
+      "aiTitle": "Assistant IA médical",
+      "hashtagsTitle": "Hashtags optimisés",
+      "reportsTitle": "Rapports périodiques"
+    }
   },
   "doctors": {
     "title": "Nos Médecins",

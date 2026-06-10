@@ -1,28 +1,29 @@
 <template>
-  <nav class="bg-white shadow-md sticky top-0 z-50">
+  <nav class="sticky top-0 z-50 border-b border-warm-200/70 bg-white/95 shadow-[0_1px_16px_rgba(28,27,24,0.06)] backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         
-        <router-link to="/" class="flex items-center gap-2">
+        <router-link to="/" class="flex items-center gap-3">
           <img
             :src="logo"
             alt="Angelo Clinic logo"
-            class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-contain flex-shrink-0"
+            class="w-9 h-9 rounded-lg object-contain flex-shrink-0 ring-1 ring-warm-200"
           />
-          <span class="font-bold text-gray-800 hidden sm:inline">Angelo Clinic</span>
+          <span class="font-bold text-warm-900 hidden sm:inline">Angelo Clinic</span>
         </router-link>
 
         
-        <div class="hidden md:flex items-center gap-6">
-          <router-link to="/" class="text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.home') }}</router-link>
-          <a href="/#services" class="text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.services') }}</a>
-          <a href="/#imagerie" class="text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.imaging') }}</a>
-          <a href="/#doctors" class="text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.doctors') }}</a>
-          <a href="/#contact" class="text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.contact') }}</a>
+        <div class="hidden md:flex items-center gap-2">
+          <router-link to="/" class="nav-link">{{ $t('nav.home') }}</router-link>
+          <router-link :to="{ path: '/', hash: '#services' }" class="nav-link">{{ $t('nav.services') }}</router-link>
+          <router-link :to="{ path: '/', hash: '#marketing-hub' }" class="nav-link">{{ $t('nav.newFeatures') }}</router-link>
+          <router-link :to="{ path: '/', hash: '#imagerie' }" class="nav-link">{{ $t('nav.imaging') }}</router-link>
+          <router-link :to="{ path: '/', hash: '#doctors' }" class="nav-link">{{ $t('nav.doctors') }}</router-link>
+          <router-link :to="{ path: '/', hash: '#contact' }" class="nav-link">{{ $t('nav.contact') }}</router-link>
 
           
           <div class="relative group">
-            <button class="px-3 py-2 text-gray-600 hover:text-gray-900 font-medium flex items-center gap-1"
+            <button class="nav-link flex items-center gap-1"
               title="Changer la langue">
               🌐 {{ languageStore.currentLanguage.toUpperCase() }}
             </button>
@@ -72,7 +73,7 @@
           
           <template v-else>
             
-            <button @click="openAppointmentModal" class="px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-700 text-white font-medium transition">
+            <button @click="openAppointmentModal" class="px-4 py-2 rounded-lg bg-primary-500 hover:bg-primary-600 text-white font-semibold shadow-sm shadow-primary-900/10 transition">
               {{ $t('nav.appointment') }}
             </button>
 
@@ -124,19 +125,20 @@
         
         <button
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded"
+          class="md:hidden p-2 text-warm-600 hover:bg-warm-100 rounded-lg"
         >
           ☰
         </button>
       </div>
 
       
-      <div v-if="mobileMenuOpen" class="md:hidden border-t border-gray-200 py-4 space-y-4">
-        <router-link @click="mobileMenuOpen = false" to="/" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.home') }}</router-link>
-        <a @click="mobileMenuOpen = false" href="/#services" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.services') }}</a>
-        <a @click="mobileMenuOpen = false" href="/#imagerie" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.imaging') }}</a>
-        <a @click="mobileMenuOpen = false" href="/#doctors" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.doctors') }}</a>
-        <a @click="mobileMenuOpen = false" href="/#contact" class="block text-gray-600 hover:text-gray-900 font-medium">{{ $t('nav.contact') }}</a>
+      <div v-if="mobileMenuOpen" class="md:hidden border-t border-warm-200 py-4 space-y-2">
+        <router-link @click="mobileMenuOpen = false" to="/" class="mobile-nav-link">{{ $t('nav.home') }}</router-link>
+        <router-link @click="mobileMenuOpen = false" :to="{ path: '/', hash: '#services' }" class="mobile-nav-link">{{ $t('nav.services') }}</router-link>
+        <router-link @click="mobileMenuOpen = false" :to="{ path: '/', hash: '#marketing-hub' }" class="mobile-nav-link">{{ $t('nav.newFeatures') }}</router-link>
+        <router-link @click="mobileMenuOpen = false" :to="{ path: '/', hash: '#imagerie' }" class="mobile-nav-link">{{ $t('nav.imaging') }}</router-link>
+        <router-link @click="mobileMenuOpen = false" :to="{ path: '/', hash: '#doctors' }" class="mobile-nav-link">{{ $t('nav.doctors') }}</router-link>
+        <router-link @click="mobileMenuOpen = false" :to="{ path: '/', hash: '#contact' }" class="mobile-nav-link">{{ $t('nav.contact') }}</router-link>
 
         <div class="px-4 py-2 border-t border-gray-200 pt-4">
           <p class="text-xs text-gray-500 font-medium mb-2">{{ $t('nav.language') }}</p>
@@ -280,6 +282,34 @@ function switchAccount() {
 <style scoped>
 nav {
   animation: slideDown 0.3s ease-out;
+}
+
+.nav-link {
+  border-radius: 0.5rem;
+  color: #4A473F;
+  font-size: 0.925rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-link:hover {
+  background: #F7F5F0;
+  color: #0A6B5C;
+}
+
+.mobile-nav-link {
+  border-radius: 0.5rem;
+  color: #4A473F;
+  display: block;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+  background: #F7F5F0;
+  color: #0A6B5C;
 }
 
 @keyframes slideDown {

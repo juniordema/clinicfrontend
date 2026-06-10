@@ -1,10 +1,10 @@
 <template>
-  <div class="min-h-screen bg-gray-50 flex flex-col">
+  <div class="min-h-screen flex flex-col bg-[linear-gradient(180deg,#fbfaf7_0%,#f7f5f0_24%,#f9f8f4_100%)] text-warm-900">
     
     <AppNavbar />
 
     
-    <main class="flex-1">
+    <main class="flex-1 relative">
       <router-view />
     </main>
 
