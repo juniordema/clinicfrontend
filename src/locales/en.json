@@ -76,12 +76,11 @@
     },
     "operations": {
       "eyebrow": "Operational control",
-      "title": "Calendar, campaigns and AI assistance",
+      "title": "Calendar, campaigns and content",
       "description": "Organize posts, coordinate campaigns, prepare medical content and track digital reports in one place.",
       "calendarTitle": "Editorial calendar",
       "remindersTitle": "Publication reminders",
       "campaignsTitle": "Campaigns",
-      "aiTitle": "Medical AI assistant",
       "hashtagsTitle": "Optimized hashtags",
       "reportsTitle": "Periodic reports"
     }

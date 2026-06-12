@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-warm-100 pt-20 pb-12" style="isolation: isolate">
+  <div class="min-h-screen bg-[linear-gradient(180deg,#f7f5f0_0%,#ffffff_42%,#f7f5f0_100%)] pt-20 pb-12" style="isolation: isolate">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <DashboardHeader />
       
@@ -12,8 +12,11 @@
 
       
       <template v-else>
-        <div class="bg-white rounded-2xl shadow-sm p-8 border border-warm-200">
-          <h2 class="text-2xl font-bold text-warm-900 mb-6">📋 {{ $t('dashboard.doctorAppointments') }}</h2>
+        <div class="fluid-panel rounded-lg p-8">
+          <h2 class="mb-6 flex items-center gap-3 text-2xl font-bold text-warm-900">
+            <i class="fas fa-clipboard-list text-primary-600"></i>
+            {{ $t('dashboard.doctorAppointments') }}
+          </h2>
           <p class="text-warm-600 mb-4">{{ $t('dashboard.doctorAppointmentsDescription') }}</p>
           <AppointmentHistory />
         </div>

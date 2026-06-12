@@ -1,9 +1,9 @@
 <template>
-  <section id="imagerie" class="py-20 bg-gradient-to-b from-white to-warm-50 border-y border-warm-200/70">
+  <section id="imagerie" class="section-y bg-gradient-to-b from-white to-warm-50 border-y border-warm-200/70">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 max-w-3xl mx-auto">
         <span class="text-primary-500 font-semibold text-sm tracking-widest uppercase">{{ $t('nav.imaging') }}</span>
-        <h2 class="font-display font-bold text-4xl sm:text-5xl text-warm-900 mt-3 mb-4">
+        <h2 class="section-title font-display font-bold text-warm-900 mt-3 mb-4">
           {{ $t('imaging.title') }}
         </h2>
         <p class="text-lg text-warm-600 max-w-3xl mx-auto">

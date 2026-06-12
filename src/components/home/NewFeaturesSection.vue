@@ -1,12 +1,12 @@
 <template>
-  <section id="marketing-hub" class="py-20 bg-gradient-to-b from-warm-50 to-white">
+  <section id="marketing-hub" class="section-y bg-gradient-to-b from-warm-50 to-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-[0.78fr_1.22fr] gap-12 items-start">
         <div class="anim-scroll">
           <span class="text-primary-500 font-semibold text-sm tracking-widest uppercase">
             {{ $t('features.eyebrow') }}
           </span>
-          <h2 class="font-display font-bold text-4xl sm:text-5xl text-warm-900 mt-3 mb-5">
+          <h2 class="section-title font-display font-bold text-warm-900 mt-3 mb-5">
             {{ $t('features.title') }}
           </h2>
           <p class="text-warm-600 leading-relaxed mb-8">
@@ -250,7 +250,7 @@
           <span class="text-primary-500 font-semibold text-sm tracking-widest uppercase">
             {{ $t('features.operations.eyebrow') }}
           </span>
-          <h3 class="font-display text-3xl sm:text-4xl font-bold text-warm-900 mt-3">
+            <h3 class="section-title font-display font-bold text-warm-900 mt-3">
             {{ $t('features.operations.title') }}
           </h3>
           <p class="text-warm-600 leading-relaxed mt-3">
@@ -258,7 +258,7 @@
           </p>
         </div>
 
-        <div class="grid lg:grid-cols-3 gap-6 items-start">
+        <div class="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] items-start">
           <div class="anim-scroll bg-white rounded-lg border border-warm-200 p-6 shadow-sm">
             <div class="flex items-center justify-between gap-4 mb-5">
               <h4 class="font-display text-2xl font-bold text-warm-900">{{ $t('features.operations.calendarTitle') }}</h4>
@@ -271,78 +271,51 @@
               <div
                 v-for="item in localizedCalendarItems"
                 :key="item.title"
-                class="rounded-lg border border-warm-200 bg-warm-50 p-4"
+                class="rounded-lg border border-warm-200 bg-warm-50 p-4 transition-colors hover:bg-white"
               >
-                <div class="flex items-start gap-3">
-                  <div class="min-w-16 rounded-lg bg-white px-3 py-2 text-center shadow-sm">
-                    <div class="text-xs font-semibold text-warm-500">{{ item.displayDate }}</div>
-                    <div class="mt-1 h-1.5 rounded-full" :style="{ backgroundColor: item.color }"></div>
+                <div class="flex items-start gap-4">
+                  <div class="flex w-20 shrink-0 flex-col items-center rounded-lg bg-white px-3 py-3 text-center shadow-sm">
+                    <div class="text-xs font-semibold uppercase tracking-wide text-warm-500">{{ item.displayDate }}</div>
+                    <div class="mt-2 h-2 w-full rounded-full" :style="{ backgroundColor: item.color }"></div>
                   </div>
                   <div class="min-w-0 flex-1">
-                    <div class="text-sm font-semibold text-warm-900">{{ item.displayTitle }}</div>
-                    <div class="text-xs text-warm-500 mt-1">{{ item.channel }}</div>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                      <span class="rounded-lg bg-white px-2.5 py-1 text-xs font-semibold text-warm-700">{{ item.displayStatus }}</span>
-                      <span class="rounded-lg bg-primary-50 px-2.5 py-1 text-xs font-semibold text-primary-700">{{ item.displayPriority }}</span>
+                    <div class="flex flex-wrap items-start justify-between gap-2">
+                      <div>
+                        <div class="text-sm font-semibold text-warm-900">{{ item.displayTitle }}</div>
+                        <div class="text-xs text-warm-500 mt-1">{{ item.channel }}</div>
+                      </div>
+                      <span class="rounded-lg bg-white px-2.5 py-1 text-xs font-semibold text-warm-700">
+                        {{ item.displayStatus }}
+                      </span>
+                    </div>
+                    <div class="mt-3">
+                      <span class="inline-flex rounded-lg bg-primary-50 px-2.5 py-1 text-xs font-semibold text-primary-700">
+                        {{ item.displayPriority }}
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="mt-5 border-t border-warm-200 pt-5">
+            <div class="mt-6 border-t border-warm-200 pt-5">
               <div class="text-sm font-semibold text-warm-800 mb-3">{{ $t('features.operations.remindersTitle') }}</div>
-              <div class="space-y-3">
+              <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 <div
                   v-for="reminder in localizedReminders"
                   :key="reminder.label"
-                  class="flex items-center justify-between gap-3 rounded-lg bg-white"
+                  class="flex items-center justify-between gap-3 rounded-lg bg-warm-50 px-4 py-3"
                 >
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center">
+                  <div class="flex min-w-0 items-center gap-3">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-700">
                       <i class="fas fa-bell text-sm"></i>
                     </div>
-                    <div>
-                      <div class="text-sm font-semibold text-warm-900">{{ reminder.displayLabel }}</div>
+                    <div class="min-w-0">
+                      <div class="truncate text-sm font-semibold text-warm-900">{{ reminder.displayLabel }}</div>
                       <div class="text-xs text-warm-500">{{ reminder.displayDue }}</div>
                     </div>
                   </div>
-                  <span class="text-xs font-bold text-warm-700">{{ reminder.time }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="anim-scroll bg-white rounded-lg border border-warm-200 p-6 shadow-sm">
-            <div class="flex items-center justify-between gap-4 mb-5">
-              <h4 class="font-display text-2xl font-bold text-warm-900">{{ $t('features.operations.campaignsTitle') }}</h4>
-              <div class="w-11 h-11 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center">
-                <i class="fas fa-bullseye"></i>
-              </div>
-            </div>
-
-            <div class="space-y-5">
-              <div v-for="campaign in localizedCampaigns" :key="campaign.name">
-                <div class="flex items-start justify-between gap-4 mb-2">
-                  <div>
-                    <div class="text-sm font-semibold text-warm-900">{{ campaign.displayName }}</div>
-                    <div class="text-xs text-warm-500 mt-1">{{ campaign.displayObjective }}</div>
-                  </div>
-                  <span class="rounded-lg bg-warm-100 px-2.5 py-1 text-xs font-semibold text-warm-700">
-                    {{ campaign.displayStatus }}
-                  </span>
-                </div>
-                <div class="h-2 rounded-full bg-warm-100 overflow-hidden">
-                  <div class="h-full rounded-full bg-purple-600" :style="{ width: `${campaign.progress}%` }"></div>
-                </div>
-                <div class="mt-3 flex flex-wrap gap-2">
-                  <span
-                    v-for="channel in campaign.channels"
-                    :key="channel"
-                    class="rounded-lg bg-purple-50 px-2.5 py-1 text-xs font-semibold text-purple-700"
-                  >
-                    {{ channel }}
-                  </span>
+                  <span class="shrink-0 text-xs font-bold text-warm-700">{{ reminder.time }}</span>
                 </div>
               </div>
             </div>
@@ -351,24 +324,33 @@
           <div class="grid gap-6">
             <div class="anim-scroll bg-white rounded-lg border border-warm-200 p-6 shadow-sm">
               <div class="flex items-center justify-between gap-4 mb-5">
-                <h4 class="font-display text-2xl font-bold text-warm-900">{{ $t('features.operations.aiTitle') }}</h4>
-                <div class="w-11 h-11 rounded-lg bg-fuchsia-50 text-fuchsia-700 flex items-center justify-center">
-                  <i class="fas fa-wand-magic-sparkles"></i>
+                <h4 class="font-display text-2xl font-bold text-warm-900">{{ $t('features.operations.campaignsTitle') }}</h4>
+                <div class="w-11 h-11 rounded-lg bg-purple-50 text-purple-700 flex items-center justify-center">
+                  <i class="fas fa-bullseye"></i>
                 </div>
               </div>
-              <div class="space-y-3">
-                <div
-                  v-for="draft in localizedAiDrafts"
-                  :key="draft.title"
-                  class="rounded-lg border border-warm-200 bg-warm-50 p-4"
-                >
-                  <div class="flex items-start justify-between gap-3">
+
+              <div class="space-y-5">
+                <div v-for="campaign in localizedCampaigns" :key="campaign.name">
+                  <div class="flex items-start justify-between gap-4 mb-2">
                     <div>
-                      <div class="text-sm font-semibold text-warm-900">{{ draft.displayTitle }}</div>
-                      <div class="text-xs text-warm-500 mt-1">{{ draft.displayPrompt }}</div>
+                      <div class="text-sm font-semibold text-warm-900">{{ campaign.displayName }}</div>
+                      <div class="text-xs text-warm-500 mt-1">{{ campaign.displayObjective }}</div>
                     </div>
-                    <span class="rounded-lg bg-white px-2.5 py-1 text-xs font-semibold text-warm-700">
-                      {{ draft.displayTone }}
+                    <span class="rounded-lg bg-warm-100 px-2.5 py-1 text-xs font-semibold text-warm-700">
+                      {{ campaign.displayStatus }}
+                    </span>
+                  </div>
+                  <div class="h-2 rounded-full bg-warm-100 overflow-hidden">
+                    <div class="h-full rounded-full bg-purple-600" :style="{ width: `${campaign.progress}%` }"></div>
+                  </div>
+                  <div class="mt-3 flex flex-wrap gap-2">
+                    <span
+                      v-for="channel in campaign.channels"
+                      :key="channel"
+                      class="rounded-lg bg-purple-50 px-2.5 py-1 text-xs font-semibold text-purple-700"
+                    >
+                      {{ channel }}
                     </span>
                   </div>
                 </div>
@@ -376,7 +358,12 @@
             </div>
 
             <div class="anim-scroll bg-white rounded-lg border border-warm-200 p-6 shadow-sm">
-              <h4 class="font-display text-2xl font-bold text-warm-900 mb-4">{{ $t('features.operations.hashtagsTitle') }}</h4>
+              <div class="flex items-center justify-between gap-4 mb-5">
+                <h4 class="font-display text-2xl font-bold text-warm-900">{{ $t('features.operations.hashtagsTitle') }}</h4>
+                <div class="w-11 h-11 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center">
+                  <i class="fas fa-hashtag"></i>
+                </div>
+              </div>
               <div class="space-y-4">
                 <div v-for="group in hashtagSuggestions" :key="group.platform">
                   <div class="text-sm font-semibold text-warm-800 mb-2">{{ group.platform }}</div>
@@ -414,7 +401,6 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import {
-  aiContentDrafts,
   communicationCampaigns,
   contentPerformanceRows,
   contentTopicSuggestions,
@@ -506,15 +492,6 @@ const localizedCampaigns = computed(() =>
     displayName: locale.value === 'en' ? campaign.nameEn || campaign.name : campaign.name,
     displayObjective: locale.value === 'en' ? campaign.objectiveEn || campaign.objective : campaign.objective,
     displayStatus: locale.value === 'en' ? campaign.statusEn || campaign.status : campaign.status
-  }))
-)
-
-const localizedAiDrafts = computed(() =>
-  aiContentDrafts.map((draft) => ({
-    ...draft,
-    displayTitle: locale.value === 'en' ? draft.titleEn || draft.title : draft.title,
-    displayPrompt: locale.value === 'en' ? draft.promptEn || draft.prompt : draft.prompt,
-    displayTone: locale.value === 'en' ? draft.toneEn || draft.tone : draft.tone
   }))
 )
 

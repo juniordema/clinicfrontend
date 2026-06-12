@@ -76,12 +76,11 @@
     },
     "operations": {
       "eyebrow": "Pilotage opérationnel",
-      "title": "Calendrier, campagnes et assistance IA",
+      "title": "Calendrier, campagnes et contenus",
       "description": "Organisez les publications, coordonnez les campagnes, préparez les contenus médicaux et suivez les rapports digitaux au même endroit.",
       "calendarTitle": "Calendrier éditorial",
       "remindersTitle": "Rappels de publication",
       "campaignsTitle": "Campagnes",
-      "aiTitle": "Assistant IA médical",
       "hashtagsTitle": "Hashtags optimisés",
       "reportsTitle": "Rapports périodiques"
     }

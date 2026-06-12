@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-2xl border border-warm-200/50 overflow-hidden">
+  <div class="fluid-panel overflow-hidden rounded-lg">
     <div class="p-5 border-b border-warm-200">
       <h3 class="font-display font-bold text-lg text-warm-900">
         {{ isDoctor ? $t('dashboard.doctorAppointments') : $t('dashboard.appointmentHistory') }}
@@ -15,7 +15,7 @@
         class="p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 hover:bg-warm-50 transition-colors"
       >
         <div class="flex items-center gap-4">
-          <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" :class="statusUi(apt.status).iconBg">
+          <div class="w-11 h-11 rounded-lg flex items-center justify-center shrink-0" :class="statusUi(apt.status).iconBg">
             <i class="fas" :class="statusUi(apt.status).icon"></i>
           </div>
           <div>

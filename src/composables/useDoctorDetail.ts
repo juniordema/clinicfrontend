@@ -1,12 +1,19 @@
 import { ref } from 'vue'
 
 const showDoctorDetail = ref(false)
-const selectedDoctorDetail = ref(null)
+const selectedDoctorDetail = ref<any | null>(null)
 
 export function useDoctorDetail() {
-  function showDoctor(doc: null) {
+  function showDoctor(doc: any) {
+    if (!doc) return
     selectedDoctorDetail.value = doc
     showDoctorDetail.value = true
   }
-  return { showDoctorDetail, selectedDoctorDetail, showDoctor }
+
+  function closeDoctorDetail() {
+    showDoctorDetail.value = false
+    selectedDoctorDetail.value = null
+  }
+
+  return { showDoctorDetail, selectedDoctorDetail, showDoctor, closeDoctorDetail }
 }

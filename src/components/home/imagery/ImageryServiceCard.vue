@@ -1,8 +1,8 @@
 <template>
   <button
     type="button"
-    class="group overflow-hidden rounded-2xl border-2 bg-white text-left transition-all hover:border-teal-500 hover:shadow-lg"
-    :class="selected ? 'border-teal-500 bg-teal-50 shadow-md' : 'border-warm-200'"
+    class="group card-hover overflow-hidden rounded-lg border bg-white text-left transition-all hover:border-teal-500"
+    :class="selected ? 'border-teal-500 bg-teal-50 shadow-md shadow-teal-900/10' : 'border-warm-200'"
     @click="$emit('select', service)"
   >
     <div class="relative aspect-[4/3] overflow-hidden bg-warm-100">
@@ -17,7 +17,7 @@
       <div class="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-teal-700 shadow-sm backdrop-blur">
         {{ service.displayRoomName }}
       </div>
-      <div class="absolute bottom-3 left-3 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-teal-600 shadow-sm backdrop-blur">
+      <div class="absolute bottom-3 left-3 flex h-11 w-11 items-center justify-center rounded-lg bg-white/90 text-teal-600 shadow-sm backdrop-blur">
         <i :class="service.icon" class="text-xl"></i>
       </div>
     </div>

@@ -1,272 +1,183 @@
 <template>
-  <nav class="sticky top-0 z-50 border-b border-warm-200/70 bg-white/95 shadow-[0_1px_16px_rgba(28,27,24,0.06)] backdrop-blur-xl">
+  <nav class="sticky top-0 z-50 border-b border-warm-200/70 bg-white/90 shadow-[0_1px_20px_rgba(28,27,24,0.06)] backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        
-        <router-link to="/" class="flex items-center gap-3">
+      <div class="flex h-16 items-center justify-between gap-4">
+        <router-link to="/" class="group flex min-w-0 items-center gap-3" @click="closeMobileMenu(); activateNav('home')">
           <img
             :src="logo"
             alt="Angelo Clinic logo"
-            class="w-9 h-9 rounded-lg object-contain flex-shrink-0 ring-1 ring-warm-200"
+            class="h-10 w-10 flex-shrink-0 rounded-lg object-contain ring-1 ring-warm-200 transition-transform duration-300 group-hover:scale-105"
           />
-          <span class="font-bold text-warm-900 hidden sm:inline">Angelo Clinic</span>
+          <span class="hidden truncate font-bold text-warm-900 sm:inline">Clinique Angelo</span>
         </router-link>
 
-        
-        <div class="hidden md:flex items-center gap-2">
-          <router-link to="/" class="nav-link">{{ $t('nav.home') }}</router-link>
-          <router-link :to="{ path: '/', hash: '#services' }" class="nav-link">{{ $t('nav.services') }}</router-link>
-          <router-link :to="{ path: '/', hash: '#marketing-hub' }" class="nav-link">{{ $t('nav.newFeatures') }}</router-link>
-          <router-link :to="{ path: '/', hash: '#imagerie' }" class="nav-link">{{ $t('nav.imaging') }}</router-link>
-          <router-link :to="{ path: '/', hash: '#doctors' }" class="nav-link">{{ $t('nav.doctors') }}</router-link>
-          <router-link :to="{ path: '/', hash: '#contact' }" class="nav-link">{{ $t('nav.contact') }}</router-link>
+        <div class="hidden lg:flex items-center gap-1">
+          <router-link
+            v-for="item in navItems"
+            :key="item.id"
+            :to="item.to"
+            class="nav-link"
+            :class="{ 'nav-link-active': isActiveNav(item.id) }"
+            @click="activateNav(item.id)"
+          >
+            {{ $t(item.labelKey) }}
+          </router-link>
+        </div>
 
-          
+        <div class="hidden lg:flex items-center gap-2">
           <div class="relative group">
-            <button class="nav-link flex items-center gap-1"
-              title="Changer la langue">
-               {{ languageStore.currentLanguage.toUpperCase() }}
+            <button class="nav-action min-w-14" title="Changer la langue">
+              <i class="fas fa-globe text-xs"></i>
+              {{ languageStore.currentLanguage.toUpperCase() }}
             </button>
-            <div class="absolute right-0 mt-0 w-24 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+            <div class="nav-menu invisible absolute right-0 top-full mt-2 w-28 opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
               <button
                 @click="languageStore.setLanguage('fr')"
-                :class="languageStore.isFrench ? 'bg-teal-50 text-teal-700' : 'text-gray-600 hover:bg-gray-50'"
-                class="w-full text-left px-4 py-2 font-medium transition"
+                :class="languageStore.isFrench ? 'bg-primary-50 text-primary-700' : 'text-warm-600 hover:bg-warm-50'"
+                class="w-full rounded-md px-3 py-2 text-left text-sm font-semibold transition-colors"
               >
-                 Fr
+                FR
               </button>
               <button
                 @click="languageStore.setLanguage('en')"
-                :class="languageStore.isEnglish ? 'bg-teal-50 text-teal-700' : 'text-gray-600 hover:bg-gray-50'"
-                class="w-full text-left px-4 py-2 font-medium transition"
+                :class="languageStore.isEnglish ? 'bg-primary-50 text-primary-700' : 'text-warm-600 hover:bg-warm-50'"
+                class="w-full rounded-md px-3 py-2 text-left text-sm font-semibold transition-colors"
               >
-                En
+                EN
               </button>
             </div>
           </div>
 
-          <template v-if="isAuthenticated">
-            <NotificationBell />
-          </template>
+          <NotificationBell v-if="isAuthenticated" />
 
-          
           <template v-if="isDoctor">
-
-            
-            <button
-              @click="handleLogout"
-              class="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg font-medium transition"
-            >
+            <button @click="handleLogout" class="nav-action text-red-600 hover:bg-red-50 hover:text-red-700">
+              <i class="fas fa-arrow-right-from-bracket text-xs"></i>
               {{ $t('nav.logout') }}
             </button>
-
-            
-            <button
-              @click="switchAccount"
-              class="px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg font-medium transition"
-              :title="$t('nav.otherAccount')"
-            >
+            <button @click="switchAccount" class="nav-action bg-blue-50 text-blue-700 hover:bg-blue-100">
               {{ $t('nav.otherAccount') }}
             </button>
           </template>
 
-          
           <template v-else>
-            
-            <button @click="openAppointmentModal" class="px-4 py-2 rounded-lg bg-primary-500 hover:bg-primary-600 text-white font-semibold shadow-sm shadow-primary-900/10 transition">
+            <button @click="openAppointmentModal" class="btn-primary inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold">
+              <i class="fas fa-calendar-check text-xs"></i>
               {{ $t('nav.appointment') }}
             </button>
 
-            
-            <template v-if="isAuthenticated">
-              <div class="flex items-center gap-3">
-                <router-link
-                  to="/dashboard"
-                  class="text-gray-600 hover:text-teal-600 font-medium flex items-center gap-2 transition"
-                >
-                  👤 {{ user?.firstName }}
-                </router-link>
-                
-                
-                <div class="relative group">
-                  <button class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition"
-                    title="Paramètres du compte">
-                    ⚙️
-                  </button>
-                  <div class="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                    <router-link to="/dashboard" class="w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-teal-600 block">
-                      {{ $t('nav.dashboard') }}
-                    </router-link>
-                    <button
-                      @click="handleLogout"
-                      class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50"
-                    >
-                      {{ $t('nav.logout') }}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </template>
+            <router-link
+              v-if="isAuthenticated"
+              to="/dashboard"
+              class="nav-action"
+            >
+              <i class="fas fa-user text-xs"></i>
+              <span class="max-w-24 truncate">{{ user?.firstName }}</span>
+            </router-link>
 
-            
             <button
               @click="isAuthenticated ? switchAccount() : openLoginModal()"
-              :class="isAuthenticated 
-                ? 'bg-blue-100 hover:bg-blue-200 text-blue-700' 
-                : 'bg-teal-600 hover:bg-teal-700 text-white'"
-              class="px-4 py-2 rounded-lg font-medium transition"
-              :title="isAuthenticated ? $t('nav.otherAccount') : $t('nav.login')"
+              class="nav-action"
+              :class="isAuthenticated ? 'bg-blue-50 text-blue-700 hover:bg-blue-100' : 'bg-primary-50 text-primary-700 hover:bg-primary-100'"
             >
               {{ isAuthenticated ? $t('nav.otherAccount') : $t('nav.login') }}
             </button>
           </template>
         </div>
 
-        
         <button
           @click="mobileMenuOpen = !mobileMenuOpen"
-          class="md:hidden p-2 text-warm-600 hover:bg-warm-100 rounded-lg"
+          class="lg:hidden flex h-10 w-10 items-center justify-center rounded-lg text-warm-700 transition-colors hover:bg-warm-100"
+          :aria-expanded="mobileMenuOpen"
+          aria-label="Ouvrir le menu"
         >
-          ☰
+          <i class="fas" :class="mobileMenuOpen ? 'fa-times' : 'fa-bars'"></i>
         </button>
       </div>
 
-      
-      <div v-if="mobileMenuOpen" class="md:hidden border-t border-warm-200 py-4 space-y-2">
-        <router-link
-            :to="{ path: '/', hash: '#services' }"
-            @click="selectedNav = 'services'"
-            :class="[
-    'px-3 py-2 rounded-lg font-medium transition',
-    selectedNav === 'services'
-      ? 'bg-teal-600 text-white'
-      : 'text-warm-700 hover:bg-teal-50 hover:text-teal-600'
-  ]"
-        >
-          {{ $t('nav.services') }}
-        </router-link>
+      <Transition name="mobile-menu">
+        <div v-if="mobileMenuOpen" class="lg:hidden border-t border-warm-200/80 py-4">
+          <div class="grid gap-1">
+            <router-link
+              v-for="item in navItems"
+              :key="item.id"
+              :to="item.to"
+              class="mobile-nav-link"
+              :class="{ 'mobile-nav-link-active': isActiveNav(item.id) }"
+              @click="closeMobileMenu(); activateNav(item.id)"
+            >
+              {{ $t(item.labelKey) }}
+            </router-link>
+          </div>
 
-        <router-link
-            :to="{ path: '/', hash: '#services' }"
-            @click="selectedNav = 'services'"
-            :class="[
-    'px-3 py-2 rounded-lg font-medium transition',
-    selectedNav === 'services'
-      ? 'bg-teal-600 text-white'
-      : 'text-warm-700 hover:bg-teal-50 hover:text-teal-600'
-  ]"
-        >
-          {{ $t('nav.services') }}
-        </router-link>
-
-        <router-link
-            :to="{ path: '/', hash: '#doctors' }"
-            @click="selectedNav = 'doctors'"
-            :class="[
-    'px-3 py-2 rounded-lg font-medium transition',
-    selectedNav === 'doctors'
-      ? 'bg-teal-600 text-white'
-      : 'text-warm-700 hover:bg-teal-50 hover:text-teal-600'
-  ]"
-        >
-          {{ $t('nav.doctors') }}
-        </router-link>        <div class="px-4 py-2 border-t border-gray-200 pt-4">
-          <p class="text-xs text-gray-500 font-medium mb-2">{{ $t('nav.language') }}</p>
-          <div class="grid grid-cols-2 gap-2">
+          <div class="mt-4 grid grid-cols-2 gap-2 border-t border-warm-200/70 pt-4">
             <button
               @click="languageStore.setLanguage('fr')"
-              :class="languageStore.isFrench ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-600'"
-              class="flex-1 px-3 py-2 rounded font-medium transition text-sm"
+              :class="languageStore.isFrench ? 'bg-primary-500 text-white' : 'bg-warm-100 text-warm-700'"
+              class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors"
             >
-               FR
+              FR
             </button>
             <button
               @click="languageStore.setLanguage('en')"
-              :class="languageStore.isEnglish ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-600'"
-              class="flex-1 px-3 py-2 rounded font-medium transition text-sm"
+              :class="languageStore.isEnglish ? 'bg-primary-500 text-white' : 'bg-warm-100 text-warm-700'"
+              class="rounded-lg px-3 py-2 text-sm font-semibold transition-colors"
             >
-               EN
+              EN
             </button>
           </div>
-        </div>
 
-        
-        <template v-if="isDoctor">
-          <div class="px-4">
-            <NotificationBell />
-          </div>
-          
-          <button
-            @click="handleLogout"
-            class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 rounded"
-          >
-            {{ $t('nav.logout') }}
-          </button>
-          
-          <button
-            @click="switchAccount"
-            class="w-full text-left px-4 py-2 text-blue-700 hover:bg-blue-50 rounded font-medium"
-          >
-            {{ $t('nav.otherAccount') }}
-          </button>
-        </template>
-
-        
-        <template v-else>
-          <div v-if="isAuthenticated" class="px-4">
-            <NotificationBell />
-          </div>
-          <button 
-            @click="openAppointmentModal"
-            class="w-full px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-700 text-white font-medium transition">
-            {{ $t('nav.appointment') }}
-          </button>
-
-          
-          <template v-if="isAuthenticated">
-            <router-link
-              to="/dashboard"
-              @click="mobileMenuOpen = false"
-              class="block px-4 py-2 text-gray-600 hover:text-teal-600 font-medium border-b border-gray-100"
-            >
-              👤 {{ user?.firstName }}
+          <div v-if="isAuthenticated" class="mt-4 flex items-center justify-between gap-3 rounded-lg bg-warm-50 p-3">
+            <router-link to="/dashboard" class="min-w-0 text-sm font-semibold text-warm-800" @click="closeMobileMenu">
+              <i class="fas fa-user mr-2 text-primary-600"></i>
+              <span class="truncate">{{ user?.firstName || $t('nav.dashboard') }}</span>
             </router-link>
-            <router-link to="/dashboard" class="block text-gray-600 hover:text-gray-900 font-medium px-4 py-2">
+            <NotificationBell />
+          </div>
+
+          <div class="mt-4 grid gap-2">
+            <button
+              v-if="!isDoctor"
+              @click="openAppointmentModal"
+              class="btn-primary flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold"
+            >
+              <i class="fas fa-calendar-check text-xs"></i>
+              {{ $t('nav.appointment') }}
+            </button>
+
+            <router-link
+              v-if="isAuthenticated"
+              to="/dashboard"
+              class="mobile-action"
+              @click="closeMobileMenu"
+            >
               {{ $t('nav.dashboard') }}
             </router-link>
+
             <button
+              v-if="isDoctor || isAuthenticated"
               @click="handleLogout"
-              class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 rounded font-medium"
+              class="mobile-action text-red-600 hover:bg-red-50"
             >
               {{ $t('nav.logout') }}
             </button>
-            <button
-              @click="switchAccount"
-              class="w-full text-left px-4 py-2 text-blue-700 hover:bg-blue-50 rounded font-medium"
-            >
-              {{ $t('nav.otherAccount') }}
-            </button>
-          </template>
 
-          
-          <button
-            @click="isAuthenticated ? switchAccount() : openLoginModal()"
-            :class="isAuthenticated 
-              ? 'bg-blue-100 hover:bg-blue-200 text-blue-700' 
-              : 'bg-teal-600 hover:bg-teal-700 text-white'"
-            class="w-full px-4 py-2 rounded-lg font-medium transition"
-          >
-            {{ isAuthenticated ? $t('nav.otherAccount') : $t('nav.login') }}
-          </button>
-        </template>
-      </div>
+            <button
+              @click="isAuthenticated ? switchAccount() : openLoginModal()"
+              class="mobile-action"
+            >
+              {{ isAuthenticated ? $t('nav.otherAccount') : $t('nav.login') }}
+            </button>
+          </div>
+        </div>
+      </Transition>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, watch, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 
 import { useAuthStore } from '@/stores/authStore'
@@ -277,8 +188,9 @@ import NotificationBell from '@/components/notifications/NotificationBell.vue'
 import { useActiveSection } from '@/data/useActiveSection'
 
 import logo from '@/assets/images/logo.png'
-const selectedNav=ref('home')
+
 const router = useRouter()
+const route = useRoute()
 const authStore = useAuthStore()
 const toastStore = useToastStore()
 const languageStore = useLanguageStore()
@@ -287,16 +199,42 @@ const { t } = useI18n()
 const { activeSection } = useActiveSection()
 
 const mobileMenuOpen = ref(false)
+const selectedNav = ref('home')
+const navItems = [
+  { id: 'home', labelKey: 'nav.home', to: '/' },
+  { id: 'services', labelKey: 'nav.services', to: { path: '/', hash: '#services' } },
+  { id: 'marketing-hub', labelKey: 'nav.newFeatures', to: { path: '/', hash: '#marketing-hub' } },
+  { id: 'imagerie', labelKey: 'nav.imaging', to: { path: '/', hash: '#imagerie' } },
+  { id: 'doctors', labelKey: 'nav.doctors', to: { path: '/', hash: '#doctors' } },
+  { id: 'contact', labelKey: 'nav.contact', to: { path: '/', hash: '#contact' } }
+]
 
 const isAuthenticated = computed(() => authStore.isAuthenticated)
 const user = computed(() => authStore.user)
 const isDoctor = computed(() => authStore.isDoctor)
 
+onMounted(() => {
+  syncNavFromRoute()
+})
+
+watch(activeSection, (sectionId) => {
+  if (sectionId) selectedNav.value = sectionId
+})
+
+watch(
+  () => route.hash,
+  () => {
+    syncNavFromRoute()
+  }
+)
+
 function openLoginModal() {
+  mobileMenuOpen.value = false
   window.appModals?.openLogin()
 }
 
 function openAppointmentModal() {
+  mobileMenuOpen.value = false
   window.appModals?.openAppointment()
 }
 
@@ -313,38 +251,144 @@ function switchAccount() {
   mobileMenuOpen.value = false
   window.appModals?.openLogin()
 }
+
+function closeMobileMenu() {
+  mobileMenuOpen.value = false
+}
+
+function isActiveNav(sectionId: string) {
+  return selectedNav.value === sectionId
+}
+
+function syncNavFromRoute() {
+  const hash = route.hash.replace('#', '')
+  if (hash) {
+    const match = navItems.find((item) => item.id === hash)
+    if (match) {
+      selectedNav.value = match.id
+      return
+    }
+  }
+
+  if (route.path === '/') {
+    selectedNav.value = activeSection.value || 'home'
+  }
+}
+
+function activateNav(sectionId: string) {
+  selectedNav.value = sectionId
+}
 </script>
 <style scoped>
 nav {
-  animation: slideDown 0.3s ease-out;
+  animation: slideDown 0.36s var(--ease-fluid);
 }
 
 .nav-link {
+  align-items: center;
   border-radius: 0.5rem;
   color: #4A473F;
+  display: inline-flex;
   font-size: 0.925rem;
   font-weight: 600;
   padding: 0.5rem 0.75rem;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  position: relative;
+  transition: background-color 0.24s var(--ease-fluid), color 0.24s var(--ease-fluid), transform 0.24s var(--ease-fluid);
+  white-space: nowrap;
 }
 
 .nav-link:hover {
   background: #F7F5F0;
   color: #0A6B5C;
+  transform: translateY(-1px);
+}
+
+.nav-link-active {
+  background: #E8F5F1;
+  color: #0A6B5C;
+  box-shadow: inset 0 0 0 1px rgba(10, 107, 92, 0.08);
+}
+
+.nav-action {
+  align-items: center;
+  border-radius: 0.5rem;
+  color: #4A473F;
+  display: inline-flex;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.8rem;
+  transition: background-color 0.24s var(--ease-fluid), color 0.24s var(--ease-fluid), transform 0.24s var(--ease-fluid);
+}
+
+.nav-action:hover {
+  background: #F7F5F0;
+  color: #0A6B5C;
+  transform: translateY(-1px);
+}
+
+.nav-menu {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(216, 211, 202, 0.72);
+  border-radius: 0.5rem;
+  box-shadow: 0 18px 46px rgba(28, 27, 24, 0.12);
+  padding: 0.35rem;
+  transition: opacity 0.18s ease, visibility 0.18s ease;
 }
 
 .mobile-nav-link {
+  align-items: center;
   border-radius: 0.5rem;
   color: #4A473F;
-  display: block;
+  display: flex;
   font-weight: 600;
   padding: 0.75rem 1rem;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.24s var(--ease-fluid), color 0.24s var(--ease-fluid), transform 0.24s var(--ease-fluid);
 }
 
 .mobile-nav-link:hover {
   background: #F7F5F0;
   color: #0A6B5C;
+}
+
+.mobile-nav-link-active {
+  background: #E8F5F1;
+  color: #0A6B5C;
+}
+
+.mobile-action {
+  border-radius: 0.5rem;
+  color: #4A473F;
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  transition: background-color 0.24s var(--ease-fluid), color 0.24s var(--ease-fluid);
+}
+
+.mobile-action:hover {
+  background: #F7F5F0;
+  color: #0A6B5C;
+}
+
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition: opacity 0.24s var(--ease-fluid), transform 0.24s var(--ease-fluid), max-height 0.28s var(--ease-fluid);
+  overflow: hidden;
+}
+
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-8px);
+}
+
+.mobile-menu-enter-to,
+.mobile-menu-leave-from {
+  max-height: 620px;
 }
 
 @keyframes slideDown {

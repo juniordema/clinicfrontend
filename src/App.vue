@@ -1,11 +1,15 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-[linear-gradient(180deg,#fbfaf7_0%,#f7f5f0_24%,#f9f8f4_100%)] text-warm-900">
+  <div class="min-h-screen flex flex-col bg-[linear-gradient(180deg,#eef8f5_0%,#ffffff_34%,#f7f5f0_100%)] text-warm-900">
     
     <AppNavbar />
 
     
     <main class="flex-1 relative">
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <Transition name="page" mode="out-in">
+          <component :is="Component" />
+        </Transition>
+      </router-view>
     </main>
 
     
@@ -23,6 +27,12 @@
       @switch-to-login="switchModals('login')"
     />
     <AppointmentModal :isOpen="showAppointmentModal" @close="showAppointmentModal = false" />
+    <DoctorDetailModal
+      :showDoctorDetail="showDoctorDetail"
+      :selectedDoctorDetail="selectedDoctorDetail"
+      @close="closeDoctorDetail"
+      @book="bookFromDoctorDetail"
+    />
 
     
     <ToastContainer />
@@ -36,10 +46,13 @@ import AppNavbar from '@/components/layout/AppNavbar.vue'
 import LoginModal from '@/components/auth/LoginModal.vue'
 import RegisterModal from '@/components/auth/RegisterModal.vue'
 import AppointmentModal from '@/components/appointment/AppointmentModal.vue'
+import DoctorDetailModal from '@/components/doctor/DoctorDetailModal.vue'
 import ChatAssistant from '@/components/chat/ChatAssistant.vue'
 import ToastContainer from '@/components/common/ToastContainer.vue'
+import { useDoctorDetail } from '@/composables/useDoctorDetail'
 
 const authStore = useAuthStore()
+const { showDoctorDetail, selectedDoctorDetail, showDoctor, closeDoctorDetail } = useDoctorDetail()
 
 const showLoginModal = ref(false)
 const showRegisterModal = ref(false)
@@ -59,6 +72,11 @@ function switchModals(to) {
   }
 }
 
+function bookFromDoctorDetail() {
+  closeDoctorDetail()
+  showAppointmentModal.value = true
+}
+
 window.appModals = {
   openLogin: () => (showLoginModal.value = true),
   closeLogin: () => (showLoginModal.value = false),
@@ -66,6 +84,8 @@ window.appModals = {
   closeRegister: () => (showRegisterModal.value = false),
   openAppointment: () => (showAppointmentModal.value = true),
   closeAppointment: () => (showAppointmentModal.value = false),
+  openDoctorDetail: showDoctor,
+  closeDoctorDetail,
 }
 </script>
 

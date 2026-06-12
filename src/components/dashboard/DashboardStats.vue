@@ -1,6 +1,6 @@
 <template>
   <div class="grid sm:grid-cols-3 gap-4 mb-8">
-    <div class="bg-white rounded-2xl p-5 border border-warm-200/50">
+    <div class="card-hover fluid-panel rounded-lg p-5">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center">
           <i class="fas fa-calendar-check text-primary-500 text-lg"></i>
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-white rounded-2xl p-5 border border-warm-200/50">
+    <div class="card-hover fluid-panel rounded-lg p-5">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-xl bg-accent-50 flex items-center justify-center">
           <i class="fas fa-history text-accent-500 text-lg"></i>
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-white rounded-2xl p-5 border border-warm-200/50">
+    <div class="card-hover fluid-panel rounded-lg p-5">
       <div class="flex items-center gap-3">
         <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
           <i class="fas fa-user text-green-500 text-lg"></i>
