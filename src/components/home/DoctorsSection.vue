@@ -17,7 +17,7 @@
             <img :src="doc.photo" :alt="doc.name" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             <div class="absolute bottom-4 left-4 right-4">
-              <span class="inline-block bg-white/90 backdrop-blur-sm text-primary-700 text-xs font-semibold px-3 py-1 rounded-lg">{{ doc.displaySpecialty }}</span>
+              <span class="inline-block bg-white/90 backdrop-blur-sm text-primary-700 text-xs font-semibold px-3 py-1 rounded-lg">{{ doc.specialty }}</span>
             </div>
           </div>
           <div class="p-5">
@@ -38,25 +38,27 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { doctors } from '@/data/doctors'
-
+import type { Doctor, Locale } from '@/data/doctors'
 const { locale } = useI18n()
+
+const currentLocale = computed(() => locale.value as Locale)
+
 const localizedDoctors = computed(() =>
-  doctors.map((doctor) => ({
-    ...doctor,
-    displaySpecialty: locale.value === 'en' ? doctor.specialtyEn || doctor.specialty : doctor.specialty,
-    displayBio: locale.value === 'en' ? doctor.bioEn || doctor.bio : doctor.bio
-  }))
+    doctors.map((doctor: Doctor) => ({
+      ...doctor,
+      ...doctor.locales[currentLocale.value]
+    }))
 )
 
-function handleBook(doc) {
+function handleBook(doc: Doctor) {
   window.appModals?.openAppointment()
 }
 
-function showDoctor(doc) {
+function showDoctor(doc: Doctor) {
   window.appModals?.openDoctorDetail?.(doc)
 }
 </script>

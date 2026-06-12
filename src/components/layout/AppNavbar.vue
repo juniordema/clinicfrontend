@@ -25,7 +25,7 @@
           <div class="relative group">
             <button class="nav-link flex items-center gap-1"
               title="Changer la langue">
-              🌐 {{ languageStore.currentLanguage.toUpperCase() }}
+               {{ languageStore.currentLanguage.toUpperCase() }}
             </button>
             <div class="absolute right-0 mt-0 w-24 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
               <button
@@ -33,14 +33,14 @@
                 :class="languageStore.isFrench ? 'bg-teal-50 text-teal-700' : 'text-gray-600 hover:bg-gray-50'"
                 class="w-full text-left px-4 py-2 font-medium transition"
               >
-                🇫🇷 Français
+                 Fr
               </button>
               <button
                 @click="languageStore.setLanguage('en')"
                 :class="languageStore.isEnglish ? 'bg-teal-50 text-teal-700' : 'text-gray-600 hover:bg-gray-50'"
                 class="w-full text-left px-4 py-2 font-medium transition"
               >
-                🇬🇧 English
+                En
               </button>
             </div>
           </div>
@@ -133,14 +133,44 @@
 
       
       <div v-if="mobileMenuOpen" class="md:hidden border-t border-warm-200 py-4 space-y-2">
-        <router-link @click="mobileMenuOpen = false" to="/" class="mobile-nav-link">{{ $t('nav.home') }}</router-link>
-        <router-link @click="mobileMenuOpen = false" :to="{ path: '/', hash: '#services' }" class="mobile-nav-link">{{ $t('nav.services') }}</router-link>
-        <router-link @click="mobileMenuOpen = false" :to="{ path: '/', hash: '#marketing-hub' }" class="mobile-nav-link">{{ $t('nav.newFeatures') }}</router-link>
-        <router-link @click="mobileMenuOpen = false" :to="{ path: '/', hash: '#imagerie' }" class="mobile-nav-link">{{ $t('nav.imaging') }}</router-link>
-        <router-link @click="mobileMenuOpen = false" :to="{ path: '/', hash: '#doctors' }" class="mobile-nav-link">{{ $t('nav.doctors') }}</router-link>
-        <router-link @click="mobileMenuOpen = false" :to="{ path: '/', hash: '#contact' }" class="mobile-nav-link">{{ $t('nav.contact') }}</router-link>
+        <router-link
+            :to="{ path: '/', hash: '#services' }"
+            @click="selectedNav = 'services'"
+            :class="[
+    'px-3 py-2 rounded-lg font-medium transition',
+    selectedNav === 'services'
+      ? 'bg-teal-600 text-white'
+      : 'text-warm-700 hover:bg-teal-50 hover:text-teal-600'
+  ]"
+        >
+          {{ $t('nav.services') }}
+        </router-link>
 
-        <div class="px-4 py-2 border-t border-gray-200 pt-4">
+        <router-link
+            :to="{ path: '/', hash: '#services' }"
+            @click="selectedNav = 'services'"
+            :class="[
+    'px-3 py-2 rounded-lg font-medium transition',
+    selectedNav === 'services'
+      ? 'bg-teal-600 text-white'
+      : 'text-warm-700 hover:bg-teal-50 hover:text-teal-600'
+  ]"
+        >
+          {{ $t('nav.services') }}
+        </router-link>
+
+        <router-link
+            :to="{ path: '/', hash: '#doctors' }"
+            @click="selectedNav = 'doctors'"
+            :class="[
+    'px-3 py-2 rounded-lg font-medium transition',
+    selectedNav === 'doctors'
+      ? 'bg-teal-600 text-white'
+      : 'text-warm-700 hover:bg-teal-50 hover:text-teal-600'
+  ]"
+        >
+          {{ $t('nav.doctors') }}
+        </router-link>        <div class="px-4 py-2 border-t border-gray-200 pt-4">
           <p class="text-xs text-gray-500 font-medium mb-2">{{ $t('nav.language') }}</p>
           <div class="grid grid-cols-2 gap-2">
             <button
@@ -148,14 +178,14 @@
               :class="languageStore.isFrench ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-600'"
               class="flex-1 px-3 py-2 rounded font-medium transition text-sm"
             >
-              🇫🇷 FR
+               FR
             </button>
             <button
               @click="languageStore.setLanguage('en')"
               :class="languageStore.isEnglish ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-600'"
               class="flex-1 px-3 py-2 rounded font-medium transition text-sm"
             >
-              🇬🇧 EN
+               EN
             </button>
           </div>
         </div>
@@ -234,21 +264,27 @@
   </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+
 import { useAuthStore } from '@/stores/authStore'
 import { useToastStore } from '@/stores/toastStore'
 import { useLanguageStore } from '@/stores/languageStore'
-import NotificationBell from '@/components/notifications/NotificationBell.vue'
-import logo from '@/assets/images/logo.png'
 
+import NotificationBell from '@/components/notifications/NotificationBell.vue'
+import { useActiveSection } from '@/data/useActiveSection'
+
+import logo from '@/assets/images/logo.png'
+const selectedNav=ref('home')
 const router = useRouter()
 const authStore = useAuthStore()
 const toastStore = useToastStore()
 const languageStore = useLanguageStore()
+
 const { t } = useI18n()
+const { activeSection } = useActiveSection()
 
 const mobileMenuOpen = ref(false)
 
@@ -278,7 +314,6 @@ function switchAccount() {
   window.appModals?.openLogin()
 }
 </script>
-
 <style scoped>
 nav {
   animation: slideDown 0.3s ease-out;

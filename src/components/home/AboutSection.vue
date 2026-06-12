@@ -12,10 +12,14 @@
               </div>
               <div class="text-right">
                 <div class="text-xs uppercase tracking-widest text-warm-400 font-semibold">{{ $t('about.yearCreated') }}</div>
-                <div class="text-sm font-semibold text-warm-900 mt-1">2010</div>
+                <div class="text-sm font-semibold text-warm-900 mt-1">2021</div>
               </div>
             </div>
-            <img src="https://picsum.photos/seed/clinic-interior-modern/600/500.jpg" alt="Intérieur de la clinique" class="relative rounded-2xl w-full object-cover shadow-lg" style="height: 420px">
+            <img
+                :src="exterieurImage"
+                alt="Extérieur de la Clinique Angelo"
+                class="relative rounded-2xl object-cover w-full h-[400px] sm:h-[450px] lg:h-[500px]"
+            />
           </div>
         </div>
         <div class="space-y-6">
@@ -79,4 +83,5 @@
 </template>
 
 <script setup>
+import exterieurImage from "@/assets/images/exterieur.png";
 </script>

@@ -33,7 +33,7 @@
               <img :src="`https://picsum.photos/seed/testimonial-patient${i + 1}/100/100.jpg`" :alt="$t(`testimonials.patient${i + 1}`)" class="w-10 h-10 rounded-full object-cover">
               <div>
                 <div class="font-semibold text-warm-800 text-sm">{{ $t(`testimonials.patient${i + 1}`) }}</div>
-                <div class="text-warm-400 text-xs">{{ `${year - (3 - i)} ans` }}</div>
+                <div class="text-warm-400 text-xs">{{ `${year - (3 - i)}` }}</div>
               </div>
             </div>
           </div>

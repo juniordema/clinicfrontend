@@ -6,7 +6,7 @@
       class="absolute inset-0 h-full w-full object-cover"
     />
     <div class="absolute inset-0 bg-gradient-to-r from-warm-900/95 via-primary-900/80 to-primary-700/35"></div>
-    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-warm-100 to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-warm-100/50 to-transparent"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-28">
       <div class="max-w-3xl">

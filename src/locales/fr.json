@@ -26,8 +26,8 @@
   "about": {
     "title": "À Propos de Nous",
     "subtitle": "Clinique Angelo",
-    "description": "Depuis notre création en 2010, la Clinique Angelo s'engage à fournir des soins médicaux de haute qualité à la communauté de Douala. Notre mission est de mettre les patients au cœur de chaque décision.",
-    "yearCreated": "Année de création: 2010",
+    "description": "Depuis notre création en 2021, la Clinique Angelo s'engage à fournir des soins médicaux de haute qualité à la communauté de Douala. Notre mission est de mettre les patients au cœur de chaque décision.",
+    "yearCreated": "Année de création: 2021",
     "location": "Douala, Cameroun",
     "team": "Notre équipe est composée de médecins spécialistes expérimentés et d'un personnel soignant dédié.",
     "mission": "Notre mission",
@@ -121,7 +121,7 @@
     "testimonial2": "Je suis très satisfait de la qualité des soins reçus. L'équipe est très attentive et les installations sont modernes.",
     "testimonial3": "Un grand merci à toute l'équipe pour leur professionnalisme et leur bienveillance. Je recommande vivement!",
     "testimonial4": "La Clinique Angelo offre une excellente prise en charge médicale. Je me sens en confiance.",
-    "patient1": "Marie Dupont",
+    "patient1": "Dongmo Duclair",
     "patient2": "Jean Nkoulou",
     "patient3": "Sophie Kamga",
     "patient4": "Pierre Essomba"
@@ -168,7 +168,7 @@
     "accountHint": "Historique, rappels automatiques",
     "yourDetails": "Vos coordonnées",
     "fullName": "Nom complet",
-    "fullNamePlaceholder": "Ex: Junior Dema",
+    "fullNamePlaceholder": "Ex: Laurent junior",
     "phoneFormat": "Format: Cameroun +237 6XX XX XX XX",
     "forConfirmation": "pour confirmation",
     "selectSpecialty": "Choisissez la spécialité",
@@ -263,8 +263,8 @@
     "description": "Votre partenaire santé à Douala",
     "quickLinks": "Liens Rapides",
     "followUs": "Suivez-nous",
-    "copyright": "© 2024 Clinique Angelo. Tous droits réservés.",
-    "established": "Établie en 2010",
+    "copyright": "© 2026 Clinique Angelo. Tous droits réservés.",
+    "established": "Établie en 2021",
     "location": "Logpom, Douala"
   },
   "buttons": {
